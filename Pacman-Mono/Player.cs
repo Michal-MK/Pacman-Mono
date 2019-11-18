@@ -8,12 +8,12 @@ namespace MonoGame {
 
 		public override Vector2 Position { get; set; }
 		Vector2 scaleVec;
-		public Vector2 Size { get; }
+		public override Vector2 Size { get; }
 
 		float rotation = 0;
 
 		float speed = 4;
-		float correctThreshold = 8;
+		float correctThreshold = 4;
 
 		private const string TEXTURE_ID = "pacman";
 		int textureOffset = 1;

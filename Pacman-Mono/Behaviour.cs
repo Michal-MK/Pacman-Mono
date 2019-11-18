@@ -6,6 +6,8 @@ namespace MonoGame {
 
 		public abstract Vector2 Position { get; set; }
 
+		public abstract Vector2 Size { get; }
+
 		public abstract void Update(GameTime time);
 
 		public abstract void Draw(GameTime time, SpriteBatch batch);

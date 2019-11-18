@@ -6,7 +6,7 @@ namespace MonoGame {
 		public const string TEXTURE_ID = "wall";
 
 		public override Vector2 Position { get; set; }
-		public Vector2 Size { get; }
+		public override Vector2 Size { get; }
 
 		private Vector2 scaleVec;
 		public Wall(Vector2 center) {

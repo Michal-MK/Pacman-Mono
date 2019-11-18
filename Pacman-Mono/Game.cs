@@ -11,8 +11,8 @@ namespace MonoGame {
 		private GraphicsDeviceManager GDManager { get; }
 		private SpriteBatch Renderer { get; set; }
 
-		public const int WINDOW_SIZE_X = 800;
-		public const int WINDOW_SIZE_Y = 800;
+		public const int WINDOW_SIZE_X = 1000;
+		public const int WINDOW_SIZE_Y = 1000;
 
 		private World world;
 
@@ -43,6 +43,7 @@ namespace MonoGame {
 			Sprites.Add("pacman4", Content.Load<Texture2D>("pacman4"));
 			Sprites.Add("wall", Content.Load<Texture2D>("wall"));
 			Sprites.Add("food", Content.Load<Texture2D>("food"));
+			Sprites.Add("creep", Content.Load<Texture2D>("creep"));
 			Font = Content.Load<SpriteFont>("font");
 			OnLoad();
 		}
