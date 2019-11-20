@@ -25,8 +25,8 @@ namespace MonoGame {
 
 		public Player(Vector2 position) {
 			Texture2D tx = Game.Sprites[TEXTURE_ID + textureOffset];
-			float scaleX = World.CellSizeX / tx.Width;
-			float scaleY = World.CellSizeY / tx.Height;
+			float scaleX = World.Instance.CellSizeX / tx.Width;
+			float scaleY = World.Instance.CellSizeY / tx.Height;
 			Scale = new Vector2(scaleX, scaleY);
 
 			Vector2 offset = tx.Bounds.Center.ToVector2() * Scale;

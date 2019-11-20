@@ -2,26 +2,23 @@
 using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGame {
-	public class Food : Behaviour {
-
-		public const string TEXTURE_ID = "food";
-
-		public override Vector2 Position { get; set; }
-
+	public class Ghost : GridAnimatedBehaviour {
 		public override Vector2 Scale { get; }
 		public override Vector2 Size { get; }
 
-		public Food(Vector2 position) {
-			Texture2D foodTex = Game.Sprites[TEXTURE_ID];
-			float scaleX = World.Instance.CellSizeX / 256;
-			float scaleY = World.Instance.CellSizeY / 256;
+		public const string TEXTURE_ID = "ghost";
+
+		public Ghost(Vector2 position) : base(World.Instance.SelectedWorld, World.Instance.GridCoordinates(position)) {
+			Texture2D tx = Game.Sprites[TEXTURE_ID];
+			float scaleX = World.Instance.CellSizeX / tx.Width;
+			float scaleY = World.Instance.CellSizeY / tx.Height;
 			Scale = new Vector2(scaleX, scaleY);
-			Size = new Vector2(foodTex.Width, foodTex.Height) * Scale;
-			Position = position + Size * 2;
+			Position = position + tx.Bounds.Center.ToVector2() * Scale;
+			Size = new Vector2(tx.Width, tx.Height) * Scale;
 		}
 
 		public override void Update(GameTime time) {
-			//No need to update
+			base.Update(time);
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {

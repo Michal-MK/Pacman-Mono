@@ -25,7 +25,7 @@ namespace MonoGame {
 
 		public bool FullyDiscovered { get; internal set; }
 
-		internal Point[] IterateBFS() {
+		public Point[] IterateBFS() {
 			List<Point> ret = new List<Point>();
 
 			Queue<Point> toGoCopy = new Queue<Point>(toGo);
@@ -43,7 +43,7 @@ namespace MonoGame {
 			return ret.ToArray();
 		}
 
-		private Point[] GetEmptyNeighbors(Point p) {
+		public Point[] GetEmptyNeighbors(Point p) {
 			List<Point> points = new List<Point>();
 
 			int xL = p.X - 1;
@@ -66,6 +66,31 @@ namespace MonoGame {
 
 			return points.ToArray();
 		}
+
+		public Point[] GetEmptyNeighborsIgnoreVisited(Point p) {
+			List<Point> points = new List<Point>();
+
+			int xL = p.X - 1;
+			int xR = p.X + 1;
+			int yB = p.Y + 1;
+			int yT = p.Y - 1;
+
+			if (xL >= 0 && graphData[p.Y, xL]) {
+				points.Add(new Point(xL, p.Y));
+			}
+			if (xR < visited.GetLength(0) && graphData[p.Y, xR]) {
+				points.Add(new Point(xR, p.Y));
+			}
+			if (yT >= 0 && graphData[yT, p.X]) {
+				points.Add(new Point(p.X, yT));
+			}
+			if (yB <= visited.GetLength(1) && graphData[yB, p.X]) {
+				points.Add(new Point(p.X, yB));
+			}
+
+			return points.ToArray();
+		}
+
 
 		public void PPrint() {
 			int ndDimLenggth = visited.GetLength(1);

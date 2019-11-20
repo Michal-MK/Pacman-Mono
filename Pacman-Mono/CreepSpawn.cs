@@ -13,8 +13,8 @@ namespace MonoGame {
 
 		public CreepSpawn(Vector2 position) {
 			Texture2D creepTex = Game.Sprites[TEXTURE_ID];
-			float scaleX = World.CellSizeX / creepTex.Width;
-			float scaleY = World.CellSizeY / creepTex.Height;
+			float scaleX = World.Instance.CellSizeX / creepTex.Width;
+			float scaleY = World.Instance.CellSizeY / creepTex.Height;
 			Scale = new Vector2(scaleX, scaleY);
 			Size = new Vector2(creepTex.Width, creepTex.Height) * Scale;
 			Position = position + Size / 2;

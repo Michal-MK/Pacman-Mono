@@ -41,6 +41,7 @@ namespace MonoGame {
 			Sprites.Add(Player.TEXTURE_ID + "2", Content.Load<Texture2D>(Player.TEXTURE_ID + "2"));
 			Sprites.Add(Player.TEXTURE_ID + "3", Content.Load<Texture2D>(Player.TEXTURE_ID + "3"));
 			Sprites.Add(Player.TEXTURE_ID + "4", Content.Load<Texture2D>(Player.TEXTURE_ID + "4"));
+			Sprites.Add(Ghost.TEXTURE_ID, Content.Load<Texture2D>(Ghost.TEXTURE_ID));
 			Sprites.Add(Wall.TEXTURE_ID, Content.Load<Texture2D>(Wall.TEXTURE_ID));
 			Sprites.Add(Food.TEXTURE_ID, Content.Load<Texture2D>(Food.TEXTURE_ID));
 			Sprites.Add(Creep.TEXTURE_ID, Content.Load<Texture2D>(Creep.TEXTURE_ID));
@@ -49,7 +50,7 @@ namespace MonoGame {
 		}
 
 		private void OnLoad() {
-			world = new World();
+			world = new World(WorldDefinitions.LARGE_WORLD_19x19);
 		}
 
 		protected override void Update(GameTime gameTime) {

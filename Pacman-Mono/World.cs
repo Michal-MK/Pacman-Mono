@@ -12,11 +12,12 @@ namespace MonoGame {
 
 		private readonly List<Wall> walls = new List<Wall>();
 		private readonly List<Food> food = new List<Food>();
+		private readonly List<Ghost> ghosts = new List<Ghost>();
 
 		public Player Player { get; }
 		public Creep Creep { get; }
-		public int SelectedWorldSizeX { get; } = WorldDefinitions.LARGE_WORLD_SIZE_X;
-		public int SelectedWorldSizeY { get; } = WorldDefinitions.LARGE_WORLD_SIZE_Y;
+		public int SelectedWorldSizeX { get; }
+		public int SelectedWorldSizeY { get; }
 		public float CellSizeX { get; }
 		public float CellSizeY { get; }
 		public char[,] SelectedWorld { get; }
@@ -61,24 +62,31 @@ namespace MonoGame {
 		}
 
 		public World(char[,] world = null) {
-			if (world == null) world = WorldDefinitions.LARGE_WORLD_19x19;
+			if (world == null) world = WorldDefinitions.DEFAULT_WORLD_9x9;
 			Instance = this;
 			SelectedWorld = world;
+			SelectedWorldSizeX = world.GetLength(1);
+			SelectedWorldSizeY = world.GetLength(0);
 			CellSizeX = Game.WINDOW_SIZE_X / (float)SelectedWorldSizeX;
 			CellSizeY = Game.WINDOW_SIZE_Y / (float)SelectedWorldSizeY;
 
 			for (int i = 0; i < SelectedWorldSizeX; i++) {
 				for (int j = 0; j < SelectedWorldSizeY; j++) {
-					if (world[j, i] == 'W')
+					if (world[j, i] == 'W') {
 						walls.Add(new Wall(new Vector2(i * CellSizeX, j * CellSizeY)));
-					if (world[j, i] == 'P')
+					}
+					if (world[j, i] == 'P') {
 						Player = new Player(new Vector2(i * CellSizeX, j * CellSizeY));
+					}
 					if (world[j, i] == '*') {
 						food.Add(new Food(new Vector2(i * CellSizeX, j * CellSizeY)));
 						TotalFoodOnMap++;
 					}
 					if (world[j, i] == 'C') {
 						Creep = new Creep(new Vector2(i * CellSizeX, j * CellSizeY));
+					}
+					if (world[j, i] == 'G') {
+						ghosts.Add(new Ghost(new Vector2(i * CellSizeX, j * CellSizeY)));
 					}
 				}
 			}
@@ -91,6 +99,9 @@ namespace MonoGame {
 		public void Update(GameTime time) {
 			Player.Update(time);
 			Creep.Update(time);
+			foreach (Ghost g in ghosts) {
+				g.Update(time);
+			}
 		}
 
 		public void Draw(GameTime time, SpriteBatch batch) {
@@ -100,6 +111,9 @@ namespace MonoGame {
 			Creep.Draw(time, batch);
 			foreach (Food _food in food) {
 				_food.Draw(time, batch);
+			}
+			foreach (Ghost ghost in ghosts) {
+				ghost.Draw(time, batch);
 			}
 			Player.Draw(time, batch);
 		}

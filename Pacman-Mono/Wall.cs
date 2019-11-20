@@ -12,8 +12,8 @@ namespace MonoGame {
 
 		public Wall(Vector2 center) {
 			Texture2D wallTex = Game.Sprites[TEXTURE_ID];
-			float scaleX = World.CellSizeX / wallTex.Width;
-			float scaleY = World.CellSizeY / wallTex.Height;
+			float scaleX = World.Instance.CellSizeX / wallTex.Width;
+			float scaleY = World.Instance.CellSizeY / wallTex.Height;
 			Scale = new Vector2(scaleX, scaleY);
 			Position = center + wallTex.Bounds.Center.ToVector2() * Scale;
 			Size = new Vector2(wallTex.Width, wallTex.Height) * Scale;

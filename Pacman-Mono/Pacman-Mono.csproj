@@ -48,7 +48,9 @@
     <Compile Include="CreepSpawn.cs" />
     <Compile Include="Food.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Ghost.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="GridAnimatedBehaviour.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

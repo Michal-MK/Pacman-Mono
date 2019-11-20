@@ -7,25 +7,29 @@ using System.Threading.Tasks;
 namespace MonoGame {
 	public static class WorldDefinitions {
 
-		public const int DEFAULT_WORLD_SIZE_X = 9;
-		public const int DEFAULT_WORLD_SIZE_Y = 9;
-
-		public static readonly char[,] DEFAULT_WORLD = new char[DEFAULT_WORLD_SIZE_X, DEFAULT_WORLD_SIZE_Y] {
+		public static readonly char[,] DEFAULT_WORLD_9x9 = new char[9, 9] {
 			{ 'W','W','W','W','W','W','W','W','W'},
 			{ 'W','_','*','_','*','_','_','C','W'},
-			{ 'W','_','W','_','_','_','_','W','W'},
+			{ 'W','G','W','_','_','_','_','W','W'},
 			{ 'W','_','_','_','_','W','_','_','W'},
 			{ 'W','_','_','W','P','_','_','*','W'},
 			{ 'W','*','_','_','*','_','_','_','W'},
 			{ 'W','_','W','_','_','_','W','_','W'},
-			{ 'W','_','W','*','_','_','*','_','W'},
+			{ 'W','_','W','*','_','_','*','G','W'},
 			{ 'W','W','W','W','W','W','W','W','W'},
 		};
 
-		public const int LARGE_WORLD_SIZE_X = 19;
-		public const int LARGE_WORLD_SIZE_Y = 19;
+		public static readonly char[,] SQUISHED_WORLD_7x9 = new char[7, 9] {
+			{ 'W','W','W','W','W','W','W','W','W'},
+			{ 'W','_','*','_','*','_','_','C','W'},
+			{ 'W','G','W','_','_','_','_','W','W'},
+			{ 'W','_','_','_','_','W','_','_','W'},
+			{ 'W','_','_','W','P','_','_','*','W'},
+			{ 'W','_','W','*','_','_','*','G','W'},
+			{ 'W','W','W','W','W','W','W','W','W'},
+		};
 
-		public static readonly char[,] LARGE_WORLD_19x19 = new char[LARGE_WORLD_SIZE_X, LARGE_WORLD_SIZE_Y] {
+		public static readonly char[,] LARGE_WORLD_19x19 = new char[19, 19] {
 			{ 'W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W'},
 			{ 'W','_','*','_','*','_','_','C','W','W','_','*','_','*','_','_','_','_','W'},
 			{ 'W','_','W','_','_','_','W','W','_','_','_','W','_','_','_','_','W','_','W'},
@@ -43,7 +47,7 @@ namespace MonoGame {
 			{ 'W','*','_','_','*','_','_','_','W','_','*','_','_','*','_','_','_','_','W'},
 			{ 'W','W','W','_','_','_','W','_','W','W','_','W','_','_','_','W','_','_','W'},
 			{ 'W','*','W','*','_','_','*','_','W','_','_','W','*','_','_','*','_','_','W'},
-			{ 'W','_','_','_','_','_','W','_','_','_','_','_','_','_','W','_','_','_','W'},
+			{ 'W','_','G','_','_','_','W','_','_','_','_','_','_','_','W','_','_','_','W'},
 			{ 'W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W','W'}
 		};
 	}
