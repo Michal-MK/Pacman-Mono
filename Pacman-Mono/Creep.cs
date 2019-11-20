@@ -8,41 +8,40 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGame {
 	public class Creep : Behaviour {
-		public override Vector2 Position { get; set; }
 
 		public const string TEXTURE_ID = "creep";
+		public const int CREEP_SPREAD_PERIOD = 2000;
+
+		public override Vector2 Position { get; set; }
+
+		public override Vector2 Size { get; }
+		public override Vector2 Scale { get; }
+
+		private readonly Graph pathGraph;
+		private readonly List<CreepSpawn> spawns = new List<CreepSpawn>();
 
 		public (int X, int Y) Start { get; set; }
 
-		public override Vector2 Size { get; }
-
-		private Vector2 scaleVec;
-
-		private Graph pathGraph;
-
-		private List<CreepSpawn> spawns = new List<CreepSpawn>();
-
 		public Creep(Vector2 position) {
 			Texture2D creepTex = Game.Sprites[TEXTURE_ID];
-			float scaleX = World.sizeX / creepTex.Width;
-			float scaleY = World.sizeY / creepTex.Height;
-			scaleVec = new Vector2(scaleX, scaleY);
-			Size = new Vector2(creepTex.Width, creepTex.Height) * scaleVec;
+			float scaleX = World.Instance.CellSizeX / creepTex.Width;
+			float scaleY = World.Instance.CellSizeY / creepTex.Height;
+			Scale = new Vector2(scaleX, scaleY);
+			Size = new Vector2(creepTex.Width, creepTex.Height) * Scale;
 			Position = position + Size / 2;
-			pathGraph = WorldHelper.GenerateGraphOfOpenSpaces(World.Instance);
+			pathGraph = WorldHelper.GenerateGraphOfOpenSpaces(World.Instance.SelectedWorld, World.Instance.GridCoordinates(position));
 		}
-
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
 			Texture2D creepTex = Game.Sprites[TEXTURE_ID];
-			batch.Draw(creepTex, Position, creepTex.Bounds, Color.White, 0, creepTex.Bounds.Center.ToVector2(), scaleVec, SpriteEffects.None, 0);
+			batch.Draw(creepTex, Position, creepTex.Bounds, Color.White, 0, creepTex.Bounds.Center.ToVector2(), Scale, SpriteEffects.None, 0);
 			foreach (CreepSpawn sp in spawns) {
 				sp.Draw(time, batch);
 			}
 		}
 
 		public override void Update(GameTime time) {
-			if ((int)time.TotalGameTime.TotalMilliseconds % 2000 == 0 && !pathGraph.FullyDiscovered) {
+			if ((int)time.TotalGameTime.TotalMilliseconds % CREEP_SPREAD_PERIOD == 0 && !pathGraph.FullyDiscovered) {
 				Point[] newlyOccupied = pathGraph.IterateBFS();
 
 				foreach (Point point in newlyOccupied) {

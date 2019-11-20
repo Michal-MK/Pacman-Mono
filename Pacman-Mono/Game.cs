@@ -37,13 +37,13 @@ namespace MonoGame {
 
 		protected override void LoadContent() {
 			Renderer = new SpriteBatch(GraphicsDevice);
-			Sprites.Add("pacman1", Content.Load<Texture2D>("pacman1"));
-			Sprites.Add("pacman2", Content.Load<Texture2D>("pacman2"));
-			Sprites.Add("pacman3", Content.Load<Texture2D>("pacman3"));
-			Sprites.Add("pacman4", Content.Load<Texture2D>("pacman4"));
-			Sprites.Add("wall", Content.Load<Texture2D>("wall"));
-			Sprites.Add("food", Content.Load<Texture2D>("food"));
-			Sprites.Add("creep", Content.Load<Texture2D>("creep"));
+			Sprites.Add(Player.TEXTURE_ID + "1", Content.Load<Texture2D>(Player.TEXTURE_ID + "1"));
+			Sprites.Add(Player.TEXTURE_ID + "2", Content.Load<Texture2D>(Player.TEXTURE_ID + "2"));
+			Sprites.Add(Player.TEXTURE_ID + "3", Content.Load<Texture2D>(Player.TEXTURE_ID + "3"));
+			Sprites.Add(Player.TEXTURE_ID + "4", Content.Load<Texture2D>(Player.TEXTURE_ID + "4"));
+			Sprites.Add(Wall.TEXTURE_ID, Content.Load<Texture2D>(Wall.TEXTURE_ID));
+			Sprites.Add(Food.TEXTURE_ID, Content.Load<Texture2D>(Food.TEXTURE_ID));
+			Sprites.Add(Creep.TEXTURE_ID, Content.Load<Texture2D>(Creep.TEXTURE_ID));
 			Font = Content.Load<SpriteFont>("font");
 			OnLoad();
 		}

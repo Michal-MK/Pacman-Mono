@@ -6,26 +6,27 @@ namespace MonoGame {
 
 		public const string TEXTURE_ID = "creep";
 
+		public override Vector2 Position { get; set; }
+
+		public override Vector2 Size { get; }
+		public override Vector2 Scale { get; }
+
 		public CreepSpawn(Vector2 position) {
 			Texture2D creepTex = Game.Sprites[TEXTURE_ID];
-			float scaleX = World.sizeX / creepTex.Width;
-			float scaleY = World.sizeY / creepTex.Height;
-			scaleVec = new Vector2(scaleX, scaleY);
-			Size = new Vector2(creepTex.Width, creepTex.Height) * scaleVec;
+			float scaleX = World.CellSizeX / creepTex.Width;
+			float scaleY = World.CellSizeY / creepTex.Height;
+			Scale = new Vector2(scaleX, scaleY);
+			Size = new Vector2(creepTex.Width, creepTex.Height) * Scale;
 			Position = position + Size / 2;
 		}
 
-		public override Vector2 Position { get; set; }
-		public override Vector2 Size { get; }
-		private Vector2 scaleVec;
+		public override void Update(GameTime time) {
+			//No need to update
+		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
 			Texture2D creepTex = Game.Sprites[TEXTURE_ID];
-			batch.Draw(creepTex, Position, creepTex.Bounds, new Color(100,100,0,50), 0, creepTex.Bounds.Center.ToVector2(), scaleVec, SpriteEffects.None, 0);
-		}
-
-		public override void Update(GameTime time) {
-			
+			batch.Draw(creepTex, Position, creepTex.Bounds, new Color(255,255,255,20) * 0.2f, 0, creepTex.Bounds.Center.ToVector2(), Scale, SpriteEffects.None, 0);
 		}
 	}
 }

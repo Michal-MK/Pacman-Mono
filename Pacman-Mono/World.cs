@@ -5,22 +5,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGame {
 	public class World {
-		private readonly List<Wall> walls = new List<Wall>();
-		private readonly List<Food> food = new List<Food>();
-		public Player Player { get; }
-		public Creep Creep { get; }
-
-		public const int DEFAULT_WORLD_SIZE_X = WorldDefinitions.LARGE_WORLD_SIZE_X;
-		public const int DEFAULT_WORLD_SIZE_Y = WorldDefinitions.LARGE_WORLD_SIZE_Y;
-
-		public const int FOOD_DISTANCE_THRESHOLD_SQUARED = 164;
-
-		public const float sizeX = Game.WINDOW_SIZE_X / (float)DEFAULT_WORLD_SIZE_X;
-		public const float sizeY = Game.WINDOW_SIZE_Y / (float)DEFAULT_WORLD_SIZE_Y;
 
 		public static World Instance { get; set; }
 
-		public int FoodOnMap { get; set; }
+		public const int FOOD_DISTANCE_THRESHOLD_SQUARED = 164;
+
+		private readonly List<Wall> walls = new List<Wall>();
+		private readonly List<Food> food = new List<Food>();
+
+		public Player Player { get; }
+		public Creep Creep { get; }
+		public int SelectedWorldSizeX { get; } = WorldDefinitions.LARGE_WORLD_SIZE_X;
+		public int SelectedWorldSizeY { get; } = WorldDefinitions.LARGE_WORLD_SIZE_Y;
+		public float CellSizeX { get; }
+		public float CellSizeY { get; }
+		public char[,] SelectedWorld { get; }
+		public int TotalFoodOnMap { get; set; }
 
 		public bool IsValidPlayerPosition(Vector2 playerPos, Vector2 playerSize, out Vector2 correction) {
 			foreach (Wall wall in walls) {
@@ -42,7 +42,7 @@ namespace MonoGame {
 		}
 
 		public Vector2 WorldCoordinates(Point point) {
-			return new Vector2(point.X * sizeX, point.Y * sizeY);
+			return new Vector2(point.X * CellSizeX, point.Y * CellSizeY);
 		}
 
 		public bool IsOverFood(Vector2 playerPos, out Food found) {
@@ -63,26 +63,29 @@ namespace MonoGame {
 		public World(char[,] world = null) {
 			if (world == null) world = WorldDefinitions.LARGE_WORLD_19x19;
 			Instance = this;
+			SelectedWorld = world;
+			CellSizeX = Game.WINDOW_SIZE_X / (float)SelectedWorldSizeX;
+			CellSizeY = Game.WINDOW_SIZE_Y / (float)SelectedWorldSizeY;
 
-			for (int i = 0; i < DEFAULT_WORLD_SIZE_X; i++) {
-				for (int j = 0; j < DEFAULT_WORLD_SIZE_Y; j++) {
+			for (int i = 0; i < SelectedWorldSizeX; i++) {
+				for (int j = 0; j < SelectedWorldSizeY; j++) {
 					if (world[j, i] == 'W')
-						walls.Add(new Wall(new Vector2(i * sizeX, j * sizeY)));
+						walls.Add(new Wall(new Vector2(i * CellSizeX, j * CellSizeY)));
 					if (world[j, i] == 'P')
-						Player = new Player(new Vector2(i * sizeX, j * sizeY));
+						Player = new Player(new Vector2(i * CellSizeX, j * CellSizeY));
 					if (world[j, i] == '*') {
-						food.Add(new Food(new Vector2(i * sizeX, j * sizeY)));
-						FoodOnMap++;
+						food.Add(new Food(new Vector2(i * CellSizeX, j * CellSizeY)));
+						TotalFoodOnMap++;
 					}
 					if (world[j, i] == 'C') {
-						Creep = new Creep(new Vector2(i * sizeX, j * sizeY));
+						Creep = new Creep(new Vector2(i * CellSizeX, j * CellSizeY));
 					}
 				}
 			}
 		}
 
-		public (int X, int Y) GridCoordinates(Vector2 worldCoodrinates) {
-			return ((int)(worldCoodrinates.X / sizeX), (int)(worldCoodrinates.Y / sizeY));
+		public Point GridCoordinates(Vector2 worldCoodrinates) {
+			return new Point((int)(worldCoodrinates.X / CellSizeX), (int)(worldCoodrinates.Y / CellSizeY));
 		}
 
 		public void Update(GameTime time) {
