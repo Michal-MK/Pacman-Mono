@@ -7,20 +7,10 @@ namespace MonoGame {
 
 		public override Vector2 Position { get; set; }
 
-		public override Vector2 Size { get; }
-		public override Vector2 Scale { get; }
+		public override Vector2 Scale { get; protected set; }
 
-		public Wall(Vector2 center) {
-			Texture2D wallTex = Game.Sprites[TEXTURE_ID];
-			float scaleX = World.Instance.CellSizeX / wallTex.Width;
-			float scaleY = World.Instance.CellSizeY / wallTex.Height;
-			Scale = new Vector2(scaleX, scaleY);
-			Position = center + wallTex.Bounds.Center.ToVector2() * Scale;
-			Size = new Vector2(wallTex.Width, wallTex.Height) * Scale;
-		}
-
-		public override void Update(GameTime time) {
-			//No need to update
+		public Wall(Vector2 position) {
+			Setup(position, TEXTURE_ID);
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {

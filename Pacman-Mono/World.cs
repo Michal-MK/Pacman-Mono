@@ -9,10 +9,12 @@ namespace MonoGame {
 		public static World Instance { get; set; }
 
 		public const int FOOD_DISTANCE_THRESHOLD_SQUARED = 164;
+		public const int ENERGIZER_DISTANCE_THRESHOLD_SQUARED = 1024 + 512;
 
 		private readonly List<Wall> walls = new List<Wall>();
 		private readonly List<Food> food = new List<Food>();
 		private readonly List<Ghost> ghosts = new List<Ghost>();
+		private readonly List<Energizer> energizers = new List<Energizer>();
 
 		public Player Player { get; }
 		public Creep Creep { get; }
@@ -42,6 +44,7 @@ namespace MonoGame {
 			return true;
 		}
 
+
 		public Vector2 WorldCoordinates(Point point) {
 			return new Vector2(point.X * CellSizeX, point.Y * CellSizeY);
 		}
@@ -57,8 +60,23 @@ namespace MonoGame {
 			return false;
 		}
 
+		public bool IsOverEnergizer(Vector2 position, out Energizer found) {
+			foreach (Energizer energ in energizers) {
+				if (Vector2.DistanceSquared(energ.Position, position) < ENERGIZER_DISTANCE_THRESHOLD_SQUARED) {
+					found = energ;
+					return true;
+				}
+			}
+			found = null;
+			return false;
+		}
+
 		public void RemoveFood(Food food) {
 			this.food.Remove(food);
+		}
+
+		public void RemoveFoodEnergizer(Energizer energ) {
+			energizers.Remove(energ);
 		}
 
 		public World(char[,] world = null) {
@@ -86,7 +104,10 @@ namespace MonoGame {
 						Creep = new Creep(new Vector2(i * CellSizeX, j * CellSizeY));
 					}
 					if (world[j, i] == 'G') {
-						ghosts.Add(new Ghost(new Vector2(i * CellSizeX, j * CellSizeY)));
+						ghosts.Add(new Ghost(new Vector2(i * CellSizeX, j * CellSizeY)) { Tint = HSV.ColorFromHue(Game.Random.NextDouble() * 360) });
+					}
+					if (world[j, i] == 'E') {
+						energizers.Add(new Energizer(new Vector2(i * CellSizeX, j * CellSizeY)));
 					}
 				}
 			}
@@ -98,7 +119,7 @@ namespace MonoGame {
 
 		public void Update(GameTime time) {
 			Player.Update(time);
-			Creep.Update(time);
+			Creep?.Update(time);
 			foreach (Ghost g in ghosts) {
 				g.Update(time);
 			}
@@ -108,12 +129,15 @@ namespace MonoGame {
 			foreach (Wall wall in walls) {
 				wall.Draw(time, batch);
 			}
-			Creep.Draw(time, batch);
+			Creep?.Draw(time, batch);
 			foreach (Food _food in food) {
 				_food.Draw(time, batch);
 			}
 			foreach (Ghost ghost in ghosts) {
 				ghost.Draw(time, batch);
+			}
+			foreach (Energizer energ in energizers) {
+				energ.Draw(time, batch);
 			}
 			Player.Draw(time, batch);
 		}

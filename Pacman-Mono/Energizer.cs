@@ -2,21 +2,21 @@
 using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGame {
-	public class Food : Behaviour {
-
-		public const string TEXTURE_ID = "food";
-
+	public class Energizer : Behaviour {
 		public override Vector2 Position { get; set; }
 
 		public override Vector2 Scale { get; protected set; }
 
-		public Food(Vector2 position) {
+		public const string TEXTURE_ID = "energizer";
+
+		public Energizer(Vector2 position) {
 			Setup(position, TEXTURE_ID);
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
-			Texture2D wallTex = Game.Sprites[TEXTURE_ID];
-			batch.Draw(wallTex, Position, wallTex.Bounds, Color.White, 0, wallTex.Bounds.Center.ToVector2(), Scale, SpriteEffects.None, 0);
+			Texture2D shape = Game.Sprites[TEXTURE_ID];
+			batch.Draw(shape, Position, shape.Bounds, Color.White, 0, shape.Bounds.Center.ToVector2(), Scale, SpriteEffects.None, 0);
+
 		}
 	}
 }

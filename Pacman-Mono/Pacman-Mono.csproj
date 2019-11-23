@@ -44,8 +44,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Behaviour.cs" />
+    <Compile Include="Colors\HSV.cs" />
     <Compile Include="Creep.cs" />
     <Compile Include="CreepSpawn.cs" />
+    <Compile Include="Energizer.cs" />
     <Compile Include="Food.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Ghost.cs" />

@@ -4,24 +4,14 @@ using Microsoft.Xna.Framework.Graphics;
 namespace MonoGame {
 	public class CreepSpawn : Behaviour {
 
-		public const string TEXTURE_ID = "creep";
+		public const string TEXTURE_ID = "creep_spawn";
 
 		public override Vector2 Position { get; set; }
 
-		public override Vector2 Size { get; }
-		public override Vector2 Scale { get; }
+		public override Vector2 Scale { get; protected set; }
 
 		public CreepSpawn(Vector2 position) {
-			Texture2D creepTex = Game.Sprites[TEXTURE_ID];
-			float scaleX = World.Instance.CellSizeX / creepTex.Width;
-			float scaleY = World.Instance.CellSizeY / creepTex.Height;
-			Scale = new Vector2(scaleX, scaleY);
-			Size = new Vector2(creepTex.Width, creepTex.Height) * Scale;
-			Position = position + Size / 2;
-		}
-
-		public override void Update(GameTime time) {
-			//No need to update
+			Setup(position, TEXTURE_ID);
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {

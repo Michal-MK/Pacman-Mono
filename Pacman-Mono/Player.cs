@@ -7,8 +7,8 @@ namespace MonoGame {
 	public class Player : Behaviour {
 
 		public override Vector2 Position { get; set; }
-		public override Vector2 Scale { get; }
-		public override Vector2 Size { get; }
+		public override Vector2 Scale { get; protected set; }
+		public override Vector2 Size { get; protected set; }
 
 		private float rotation = 0;
 		private int textureOffset = 1;
@@ -21,18 +21,11 @@ namespace MonoGame {
 
 		public float Speed { get; set; } = 4;
 		public int FoodCollected { get; private set; } = 0;
+		public int FruitsCollected { get; private set; } = 0;
 
 
 		public Player(Vector2 position) {
-			Texture2D tx = Game.Sprites[TEXTURE_ID + textureOffset];
-			float scaleX = World.Instance.CellSizeX / tx.Width;
-			float scaleY = World.Instance.CellSizeY / tx.Height;
-			Scale = new Vector2(scaleX, scaleY);
-
-			Vector2 offset = tx.Bounds.Center.ToVector2() * Scale;
-			Size = new Vector2(tx.Width, tx.Height) * Scale;
-
-			Position = position + offset;
+			Setup(position, TEXTURE_ID + textureOffset);
 		}
 
 		public override void Update(GameTime time) {
@@ -51,9 +44,15 @@ namespace MonoGame {
 				}
 			}
 
-			if (World.Instance.IsOverFood(Position, out Food found)) {
-				World.Instance.RemoveFood(found);
+			if (World.Instance.IsOverFood(Position, out Food foundF)) {
+				World.Instance.RemoveFood(foundF);
 				FoodCollected++;
+			}
+
+			if (World.Instance.IsOverEnergizer(Position, out Energizer foundE)) {
+				World.Instance.RemoveFoodEnergizer(foundE);
+				Speed += 1;
+				FruitsCollected++;
 			}
 
 			if (state.IsKeyDown(Keys.Down)) {
@@ -166,6 +165,8 @@ namespace MonoGame {
 			Texture2D tx = Game.Sprites[TEXTURE_ID + textureOffset];
 			batch.Draw(tx, Position, tx.Bounds, Color.White, rotation, tx.Bounds.Center.ToVector2(), Scale, flipTexture ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
 			batch.DrawString(Game.Font, $"Food collected: {FoodCollected}/{World.Instance.TotalFoodOnMap}", Vector2.One * 20, Color.White);
+			batch.DrawString(Game.Font, $"Fruits Collected: {FruitsCollected}", Vector2.One * 20 + Vector2.UnitY * 16, Color.White);
+			batch.DrawString(Game.Font, $"Total Points: {FoodCollected * 10 + FruitsCollected * 200}", Vector2.One * 20 + Vector2.UnitY * 32, Color.White);
 		}
 	}
 }

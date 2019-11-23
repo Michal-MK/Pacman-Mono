@@ -13,7 +13,6 @@ namespace MonoGame {
 		public float AnimationSpeed { get; set; } = 0.04f;
 
 		#region Private animation
-		private readonly Random r = new Random();
 		private bool animate;
 		private Point target;
 		private Point previousTarget;
@@ -38,7 +37,7 @@ namespace MonoGame {
 				}
 				previousTarget = target;
 
-				SelectTarget(targets[r.Next(0, targets.Length)]);
+				SelectTarget(targets[Game.Random.Next(0, targets.Length)]);
 				Animate();
 			}
 			else {

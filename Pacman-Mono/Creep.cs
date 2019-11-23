@@ -14,8 +14,7 @@ namespace MonoGame {
 
 		public override Vector2 Position { get; set; }
 
-		public override Vector2 Size { get; }
-		public override Vector2 Scale { get; }
+		public override Vector2 Scale { get; protected set; }
 
 		private readonly Graph pathGraph;
 		private readonly List<CreepSpawn> spawns = new List<CreepSpawn>();
@@ -23,12 +22,7 @@ namespace MonoGame {
 		public (int X, int Y) Start { get; set; }
 
 		public Creep(Vector2 position) {
-			Texture2D creepTex = Game.Sprites[TEXTURE_ID];
-			float scaleX = World.Instance.CellSizeX / creepTex.Width;
-			float scaleY = World.Instance.CellSizeY / creepTex.Height;
-			Scale = new Vector2(scaleX, scaleY);
-			Size = new Vector2(creepTex.Width, creepTex.Height) * Scale;
-			Position = position + Size / 2;
+			Setup(position, TEXTURE_ID);
 			pathGraph = WorldHelper.GenerateGraphOfOpenSpaces(World.Instance.SelectedWorld, World.Instance.GridCoordinates(position));
 		}
 
