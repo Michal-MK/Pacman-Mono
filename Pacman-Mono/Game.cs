@@ -49,6 +49,7 @@ namespace MonoGame {
 			Sprites.Add(Energizer.TEXTURE_ID, Content.Load<Texture2D>(Energizer.TEXTURE_ID));
 			Sprites.Add(Food.TEXTURE_ID, Content.Load<Texture2D>(Food.TEXTURE_ID));
 			Sprites.Add(Creep.TEXTURE_ID, Content.Load<Texture2D>(Creep.TEXTURE_ID));
+			Sprites.Add(Bonus.TEXTURE_ID, Content.Load<Texture2D>(Bonus.TEXTURE_ID));
 			Sprites.Add(CreepSpawn.TEXTURE_ID, Content.Load<Texture2D>(CreepSpawn.TEXTURE_ID));
 			Font = Content.Load<SpriteFont>("font");
 			OnLoad();

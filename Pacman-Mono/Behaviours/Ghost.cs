@@ -15,11 +15,8 @@ namespace MonoGame {
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
-			Texture2D shape = Game.Sprites[TEXTURE_ID_SHAPE];
-			batch.Draw(shape, Position, shape.Bounds, Tint, 0, shape.Bounds.Center.ToVector2(), Scale, SpriteEffects.None, 0);
-
-			Texture2D eyes = Game.Sprites[TEXTURE_ID_EYES];
-			batch.Draw(eyes, Position, eyes.Bounds, Color.White, 0, eyes.Bounds.Center.ToVector2(), Scale, SpriteEffects.None, 0);
+			SimpleDraw(time, batch, TEXTURE_ID_SHAPE, Tint);
+			SimpleDraw(time, batch, TEXTURE_ID_EYES, Color.White);
 		}
 	}
 }

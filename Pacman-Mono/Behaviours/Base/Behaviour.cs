@@ -28,5 +28,10 @@ namespace MonoGame {
 		}
 
 		public abstract void Draw(GameTime time, SpriteBatch batch);
+
+		public void SimpleDraw(GameTime time, SpriteBatch batch, string textureID, Color color) {
+			Texture2D tex = Game.Sprites[textureID];
+			batch.Draw(tex, Position, tex.Bounds, color, 0, tex.Bounds.Center.ToVector2(), Scale, SpriteEffects.None, 0);
+		}
 	}
 }

@@ -37,29 +37,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>_Engine\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationManifest>_Engine\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Behaviour.cs" />
+    <Compile Include="Behaviours\Base\Behaviour.cs" />
+    <Compile Include="Behaviours\Bonus.cs" />
     <Compile Include="Colors\HSV.cs" />
-    <Compile Include="Creep.cs" />
-    <Compile Include="CreepSpawn.cs" />
-    <Compile Include="Energizer.cs" />
-    <Compile Include="Food.cs" />
+    <Compile Include="Behaviours\Creep.cs" />
+    <Compile Include="Behaviours\CreepSpawn.cs" />
+    <Compile Include="Behaviours\Energizer.cs" />
+    <Compile Include="Behaviours\Food.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Ghost.cs" />
-    <Compile Include="Graph.cs" />
-    <Compile Include="GridAnimatedBehaviour.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Behaviours\Ghost.cs" />
+    <Compile Include="Structures\Graph.cs" />
+    <Compile Include="Behaviours\Base\GridAnimatedBehaviour.cs" />
+    <Compile Include="Behaviours\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wall.cs" />
-    <Compile Include="World.cs" />
-    <Compile Include="WorldDefinitions.cs" />
-    <Compile Include="WorldHelper.cs" />
+    <Compile Include="Behaviours\Wall.cs" />
+    <Compile Include="World\BonusSpawner.cs" />
+    <Compile Include="World\World.cs" />
+    <Compile Include="World\WorldDefinitions.cs" />
+    <Compile Include="World\WorldHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -70,8 +72,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icon.ico" />
-    <EmbeddedResource Include="Icon.bmp" />
+    <EmbeddedResource Include="_Engine\Icon.ico" />
+    <EmbeddedResource Include="_Engine\Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
@@ -107,20 +109,20 @@
       <Link>x64\libopenal.so.1</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\libSDL2-2.0.0.dylib">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\libSDL2-2.0.0.dylib">
       <Link>libSDL2-2.0.0.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\libopenal.1.dylib">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\libopenal.1.dylib">
       <Link>libopenal.1.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll.config">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll.config">
       <Link>MonoGame.Framework.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="app.config" />
-    <None Include="app.manifest" />
+    <None Include="_Engine\app.config" />
+    <None Include="_Engine\app.manifest" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

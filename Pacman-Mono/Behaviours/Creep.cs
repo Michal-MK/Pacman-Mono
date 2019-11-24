@@ -27,8 +27,7 @@ namespace MonoGame {
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
-			Texture2D creepTex = Game.Sprites[TEXTURE_ID];
-			batch.Draw(creepTex, Position, creepTex.Bounds, Color.White, 0, creepTex.Bounds.Center.ToVector2(), Scale, SpriteEffects.None, 0);
+			SimpleDraw(time, batch, TEXTURE_ID, Color.White);
 			foreach (CreepSpawn sp in spawns) {
 				sp.Draw(time, batch);
 			}

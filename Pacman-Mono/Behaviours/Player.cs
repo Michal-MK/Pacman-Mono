@@ -50,8 +50,12 @@ namespace MonoGame {
 			}
 
 			if (World.Instance.IsOverEnergizer(Position, out Energizer foundE)) {
-				World.Instance.RemoveFoodEnergizer(foundE);
+				World.Instance.RemoveEnergizer(foundE);
 				Speed += 1;
+			}
+
+			if (World.Instance.IsOverBonus(Position, out Bonus foundB)) {
+				World.Instance.RemoveBonus(foundB);
 				FruitsCollected++;
 			}
 

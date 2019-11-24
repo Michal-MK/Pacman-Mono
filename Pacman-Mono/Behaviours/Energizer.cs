@@ -13,10 +13,6 @@ namespace MonoGame {
 			Setup(position, TEXTURE_ID);
 		}
 
-		public override void Draw(GameTime time, SpriteBatch batch) {
-			Texture2D shape = Game.Sprites[TEXTURE_ID];
-			batch.Draw(shape, Position, shape.Bounds, Color.White, 0, shape.Bounds.Center.ToVector2(), Scale, SpriteEffects.None, 0);
-
-		}
+		public override void Draw(GameTime time, SpriteBatch batch) => SimpleDraw(time, batch, TEXTURE_ID, Color.White);
 	}
 }
