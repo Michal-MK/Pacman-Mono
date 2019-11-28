@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Input;
 namespace MonoGame {
 	public class Player : Behaviour {
 
+		public event EventHandler<EnergizerPickupEventArgs> OnEnergizerPickup;
+
 		public override Vector2 Position { get; set; }
 		public override Vector2 Scale { get; protected set; }
 		public override Vector2 Size { get; protected set; }
@@ -14,7 +16,8 @@ namespace MonoGame {
 		private int textureOffset = 1;
 		private int textureOffsetCounter = 0;
 		private bool counterRises = true;
-		bool flipTexture = false;
+		private bool flipTexture = false;
+		private int energizersPickedUp = 0;
 
 		private const float CORRECTION_THRESHOLD = 4;
 		public const string TEXTURE_ID = "pacman";
@@ -51,6 +54,8 @@ namespace MonoGame {
 
 			if (World.Instance.IsOverEnergizer(Position, out Energizer foundE)) {
 				World.Instance.RemoveEnergizer(foundE);
+				energizersPickedUp++;
+				OnEnergizerPickup?.Invoke(this, new EnergizerPickupEventArgs(foundE, energizersPickedUp));
 				Speed += 1;
 			}
 

@@ -50,6 +50,7 @@
     <Compile Include="Behaviours\CreepSpawn.cs" />
     <Compile Include="Behaviours\Energizer.cs" />
     <Compile Include="Behaviours\Food.cs" />
+    <Compile Include="EventArgs\EnergizerPickupEventArgs.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Behaviours\Ghost.cs" />
     <Compile Include="Structures\Graph.cs" />

@@ -3,8 +3,8 @@
 namespace MonoGame {
 	public class BonusSpawner {
 
-		public const int MIN_SPAWN_THRESHOLD = 500;
-		public const int MAX_SPAWN_THRESHOLD = 2000;
+		public const int MIN_SPAWN_THRESHOLD = 400;
+		public const int MAX_SPAWN_THRESHOLD = 1600;
 
 		private int counter;
 		private int spawnTrigger;

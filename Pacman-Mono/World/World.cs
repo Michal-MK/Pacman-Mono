@@ -51,6 +51,7 @@ namespace MonoGame {
 					}
 					if (world[j, i] == 'P') {
 						Player = new Player(new Vector2(i * CellSizeX, j * CellSizeY));
+						Player.OnEnergizerPickup += Player_OnEnergizerPickup;
 					}
 					if (world[j, i] == '*') {
 						food.Add(new Food(new Vector2(i * CellSizeX, j * CellSizeY)));
@@ -65,13 +66,12 @@ namespace MonoGame {
 					if (world[j, i] == 'E') {
 						energizers.Add(new Energizer(new Vector2(i * CellSizeX, j * CellSizeY)));
 					}
-					if(world[j,i] == '_') {
+					if (world[j, i] == '_') {
 						openSpaces.Add(new Point(i, j));
 					}
 				}
 			}
 		}
-
 
 		#region Collisions
 
@@ -123,6 +123,15 @@ namespace MonoGame {
 
 		#endregion
 
+		#region Events
+
+		private void Player_OnEnergizerPickup(object sender, EnergizerPickupEventArgs e) {
+			foreach (Ghost gh in ghosts) {
+				gh.Scare(e.TotalCollected);
+			}
+		}
+
+		#endregion
 
 		public Vector2 WorldCoordinates(Point point) => new Vector2(point.X * CellSizeX, point.Y * CellSizeY);
 
