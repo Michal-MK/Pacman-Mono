@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace MonoGame {
 	public class BonusSpawner {
@@ -37,6 +38,14 @@ namespace MonoGame {
 		private void OnBonusCollected(object sender, Bonus casted) {
 			BonusSpawned = false;
 			casted.OnCollected -= OnBonusCollected;
+		}
+
+		public void DespawnBonus() {
+			if(bonus != null) {
+				bonus.OnCollected -= OnBonusCollected;
+			}
+			BonusSpawned = false;
+			World.Instance.SpawnBonus(World.Instance.WorldCoordinates(World.Instance.GetRandomOpenSpot()));
 		}
 	}
 }

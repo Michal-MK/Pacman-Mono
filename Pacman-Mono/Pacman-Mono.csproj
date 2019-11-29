@@ -43,6 +43,9 @@
     <ApplicationManifest>_Engine\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AI\BasicAI.cs" />
+    <Compile Include="AI\Base\IGridAI.cs" />
+    <Compile Include="AI\ChaserAI.cs" />
     <Compile Include="Behaviours\Base\Behaviour.cs" />
     <Compile Include="Behaviours\Bonus.cs" />
     <Compile Include="Colors\HSV.cs" />
