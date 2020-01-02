@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.FileSystem;
 
 namespace MonoGame {
 	public class Player : Behaviour {
@@ -30,9 +31,11 @@ namespace MonoGame {
 		public int FruitsCollected { get; private set; } = 0;
 		public int GhostsEaten { get; private set; } = 0;
 
+		public readonly DateTime Start;
 
 		public Player(Vector2 position) {
 			Setup(position, TEXTURE_ID + textureOffset);
+			Start = DateTime.Now;
 		}
 
 		public override void Update(GameTime time) {
@@ -55,6 +58,8 @@ namespace MonoGame {
 				World.Instance.RemoveFood(foundF);
 				FoodCollected++;
 				if (FoodCollected == World.Instance.TotalFoodOnMap) {
+					FileManager.Save(this);
+					Game.Instance.SceneManager.SwitchToPostGame(new PostGameData(this, GameResult.Win));
 					//TODO Win
 				}
 			}
@@ -78,7 +83,7 @@ namespace MonoGame {
 				}
 				else {
 					//TODO Game over
-					World.Instance.Restart();
+					Game.Instance.SceneManager.SwitchToPostGame(new PostGameData(this, GameResult.Loss));
 				}
 			}
 
@@ -197,8 +202,11 @@ namespace MonoGame {
 			batch.DrawString(Game.Font, $"Fruits collected: {FruitsCollected}", Vector2.One * 20 + Vector2.UnitY * 16, Color.White);
 			batch.DrawString(Game.Font, $"Ghosts eaten: {GhostsEaten}", Vector2.One * 20 + Vector2.UnitY * 32, Color.White);
 
-			int points = FoodCollected * FOOD_VALUE + FruitsCollected * FRUIT_VALUE + GhostsEaten * GHOST_VALUE;
-			batch.DrawString(Game.Font, $"Total Points: {points}", Vector2.One * 20 + Vector2.UnitY * 48, Color.White);
+			batch.DrawString(Game.Font, $"Total Points: {GetScore()}", Vector2.One * 20 + Vector2.UnitY * 48, Color.White);
+		}
+
+		public int GetScore() {
+			return FoodCollected * FOOD_VALUE + FruitsCollected * FRUIT_VALUE + GhostsEaten * GHOST_VALUE;
 		}
 	}
 }

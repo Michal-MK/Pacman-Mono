@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.UI;
 
 namespace MonoGame {
 	/// <summary>
@@ -16,14 +17,19 @@ namespace MonoGame {
 
 		public static Random Random { get; } = new Random();
 
-		private World world;
-
 		public static Dictionary<string, Texture2D> Sprites { get; } = new Dictionary<string, Texture2D>();
 		public static SpriteFont Font { get; set; }
+
+		public static Game Instance { get; set; }
+
+		public Scene CurrentScene { get; set; }
+
+		public SceneManager SceneManager { get; set; }
 
 		public Game() {
 			GDManager = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
+			Instance = this;
 		}
 
 		protected override void Initialize() {
@@ -51,24 +57,29 @@ namespace MonoGame {
 			Sprites.Add(Creep.TEXTURE_ID, Content.Load<Texture2D>(Creep.TEXTURE_ID));
 			Sprites.Add(Bonus.TEXTURE_ID, Content.Load<Texture2D>(Bonus.TEXTURE_ID));
 			Sprites.Add(CreepSpawn.TEXTURE_ID, Content.Load<Texture2D>(CreepSpawn.TEXTURE_ID));
+
+			Sprites.Add(Button.TEXTURE_ID, Content.Load<Texture2D>(Button.TEXTURE_ID));
 			Font = Content.Load<SpriteFont>("font");
 			OnLoad();
 		}
 
 		private void OnLoad() {
-			world = new World(WorldDefinitions.LARGE_WORLD_19x19);
+			SceneManager = new SceneManager();
+			SceneManager.SwitchSceneEmpty(ActiveScene.Menu);
 		}
 
 		protected override void Update(GameTime gameTime) {
-			world.Update(gameTime);
+			CurrentScene.Update(gameTime);
 			base.Update(gameTime);
 		}
 
 		protected override void Draw(GameTime gameTime) {
 			GraphicsDevice.Clear(Color.Black);
 			Renderer.Begin();
-			world.Draw(gameTime, Renderer);
+
+			CurrentScene.Draw(gameTime, Renderer);
 			base.Draw(gameTime);
+
 			Renderer.End();
 		}
 	}
