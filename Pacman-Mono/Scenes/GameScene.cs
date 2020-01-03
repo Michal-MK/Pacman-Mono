@@ -16,7 +16,7 @@ namespace MonoGame {
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
-			World.Draw(time,batch);
+			World.Draw(time, batch);
 		}
 	}
 }

@@ -15,7 +15,8 @@ namespace MonoGame {
 					return;
 				}
 				case ActiveScene.PostGame: {
-					throw new NotImplementedException("Post game does not exist yet!");
+					throw new NotImplementedException($"Post game needs additional data," +
+													  $" use '{nameof(SwitchToPostGame)}({nameof(PostGameData)} data)' function.");
 				}
 			}
 		}
