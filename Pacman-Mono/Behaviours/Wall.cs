@@ -6,7 +6,7 @@ namespace MonoGame.Behaviours {
 	public class Wall : Behaviour {
 		public const string TEXTURE_ID = "wall";
 
-		public override Vector2 Position { get; protected set; }
+		public override Vector2 Position { get; set; }
 
 		protected override Vector2 Scale { get; set; }
 

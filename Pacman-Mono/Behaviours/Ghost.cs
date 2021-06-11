@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.AI;
+using MonoGame.Behaviours.Base;
+using MonoGame.World;
 
 namespace MonoGame.Behaviours {
 	public class Ghost : GridAnimatedBehaviour {
@@ -12,13 +13,13 @@ namespace MonoGame.Behaviours {
 
 		public const string TEXTURE_ID_SHAPE = "ghost/ghost_shape";
 		public const string TEXTURE_ID_EYES = "ghost/ghost_eyes";
-		public static readonly Color AFRAID_TINT = Color.Blue;
+		private static readonly Color AFRAID_TINT = Color.Blue;
 
 		private int afraidTicksRemaining = 0;
-		private Vector2 respawnPosition;
+		private readonly Vector2 respawnPosition;
 
 
-		public Ghost(Vector2 position, Type aiType) : base(World.Instance.SelectedWorld, World.Instance.GridCoordinates(position)) {
+		public Ghost(Vector2 position, Type aiType) : base(GameWorld.Instance.SelectedWorld, GameWorld.Instance.GridCoordinates(position)) {
 			Setup(position, TEXTURE_ID_SHAPE);
 			respawnPosition = Position;
 			AddAI(aiType);
@@ -41,14 +42,14 @@ namespace MonoGame.Behaviours {
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
-			SimpleDraw(time, batch, Tint, TEXTURE_ID_SHAPE);
+			SimpleDraw(time, batch, IsAfraid ? AFRAID_TINT : Tint, TEXTURE_ID_SHAPE);
 			SimpleDraw(time, batch, Color.White, TEXTURE_ID_EYES);
 		}
 
 		public void Respawn() {
 			IsAfraid = false;
 			Position = respawnPosition;
-			base.AI.Reset();
+			AI.Reset();
 		}
 	}
 }

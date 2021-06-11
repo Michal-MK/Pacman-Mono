@@ -2,8 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.UI.Enums;
 
-namespace MonoGame.UI {
+namespace MonoGame.UI.Controls {
 	public class Button {
 
 		public const string TEXTURE_ID = "button";
@@ -48,7 +49,7 @@ namespace MonoGame.UI {
 					activeState = ButtonState.Pressed;
 				}
 				if (state.LeftButton == ButtonState.Released && activeState == ButtonState.Pressed) {
-					OnClick?.Invoke(this, EventArgs.Empty);
+					OnClick?.Invoke(this, System.EventArgs.Empty);
 					activeState = ButtonState.Released;
 				}
 				isMouseOver = true;

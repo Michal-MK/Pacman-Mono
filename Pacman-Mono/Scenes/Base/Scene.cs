@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Scenes.Enum;
 
-namespace MonoGame {
+namespace MonoGame.Scenes.Base {
 	public abstract class Scene {
 
 		public abstract ActiveScene SceneName { get; }

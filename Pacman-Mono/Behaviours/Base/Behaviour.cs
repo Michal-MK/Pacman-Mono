@@ -5,7 +5,7 @@ using MonoGame.World;
 namespace MonoGame.Behaviours.Base {
 	public abstract class Behaviour {
 
-		public abstract Vector2 Position { get; protected set; }
+		public abstract Vector2 Position { get; set; }
 
 		public virtual Vector2 Size { get; protected set; }
 

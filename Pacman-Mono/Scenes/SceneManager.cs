@@ -1,6 +1,8 @@
 ﻿using System;
+using MonoGame.Scenes.Enum;
+using MonoGame.Structures;
 
-namespace MonoGame {
+namespace MonoGame.Scenes {
 	public class SceneManager {
 		public ActiveScene ActiveScene { get; set; }
 
@@ -19,10 +21,12 @@ namespace MonoGame {
 													  $" use '{nameof(SwitchToPostGame)}({nameof(PostGameData)} data)' function.");
 				}
 			}
+			ActiveScene = scene;
 		}
 
 		public void SwitchToPostGame(PostGameData data) {
 			Game.Instance.CurrentScene = new PostGameScene(data);
+			ActiveScene = ActiveScene.PostGame;
 		}
 	}
 }

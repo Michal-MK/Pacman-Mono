@@ -1,27 +1,29 @@
 ﻿using System;
+using MonoGame.Behaviours;
+using MonoGame.Enums;
 
-namespace MonoGame {
+namespace MonoGame.Structures {
 	public struct PostGameData {
 		public PostGameData(Player player, GameResult win) {
 			Result = win;
 			GhostsEaten = player.GhostsEaten;
 			FruitsCollected = player.FruitsCollected;
 			FoodCollected = player.FoodCollected;
-			StartTime = player.Start;
+			StartTime = player.start;
 			EndTime = DateTime.Now;
 		}
 
-		public GameResult Result { get; set; }
+		public GameResult Result { get; }
 
-		public int GhostsEaten { get; set; }
+		public int GhostsEaten { get; }
 
-		public int FruitsCollected { get; set; }
+		public int FruitsCollected { get; }
 
-		public int FoodCollected { get; set; }
+		public int FoodCollected { get; }
 
-		public DateTime StartTime { get; set; }
+		public DateTime StartTime { get; }
 
-		public DateTime EndTime { get; set; }
+		public DateTime EndTime { get; }
 
 		public TimeSpan PlayTime => EndTime - StartTime;
 	}

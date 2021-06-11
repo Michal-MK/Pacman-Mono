@@ -5,7 +5,7 @@ using MonoGame.Behaviours.Base;
 
 namespace MonoGame.Behaviours {
 	public class Bonus : Behaviour {
-		public override Vector2 Position { get; protected set; }
+		public override Vector2 Position { get; set; }
 
 		public event EventHandler OnCollected;
 

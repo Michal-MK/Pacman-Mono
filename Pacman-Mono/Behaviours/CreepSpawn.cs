@@ -7,7 +7,7 @@ namespace MonoGame.Behaviours {
 
 		public const string TEXTURE_ID = "creep_spawn";
 
-		public override Vector2 Position { get; protected set; }
+		public override Vector2 Position { get; set; }
 
 		protected override Vector2 Scale { get; set; }
 

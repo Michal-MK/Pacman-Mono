@@ -11,7 +11,7 @@ namespace MonoGame.Behaviours {
 		public const string TEXTURE_ID = "creep";
 		private const int CREEP_SPREAD_PERIOD = 2000;
 
-		public override Vector2 Position { get; protected set; }
+		public override Vector2 Position { get; set; }
 
 		protected override Vector2 Scale { get; set; }
 

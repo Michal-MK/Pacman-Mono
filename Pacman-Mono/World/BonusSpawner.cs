@@ -45,7 +45,7 @@ namespace MonoGame.World {
 				bonus.OnCollected -= OnBonusCollected;
 			}
 			BonusSpawned = false;
-			World.Instance.SpawnBonus(World.Instance.WorldCoordinates(World.Instance.GetRandomOpenSpot()));
+			GameWorld.Instance.SpawnBonus(GameWorld.Instance.WorldCoordinates(GameWorld.Instance.GetRandomOpenSpot()));
 		}
 	}
 }

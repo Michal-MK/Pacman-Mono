@@ -1,22 +1,25 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Scenes.Base;
+using MonoGame.Scenes.Enum;
+using MonoGame.World;
 
-namespace MonoGame {
+namespace MonoGame.Scenes {
 	public class GameScene : Scene {
 		public override ActiveScene SceneName => ActiveScene.Game;
 
-		public World World { get; set; }
+		private readonly GameWorld world;
 
 		public GameScene() {
-			World = new World(WorldDefinitions.LARGE_WORLD_19x19);
+			world = new GameWorld(WorldDefinitions.LARGE_WORLD_19x19);
 		}
 
 		public override void Update(GameTime time) {
-			World.Update(time);
+			world.Update(time);
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
-			World.Draw(time, batch);
+			world.Draw(time, batch);
 		}
 	}
 }

@@ -48,14 +48,13 @@
     <Compile Include="AI\ChaserAI.cs" />
     <Compile Include="Behaviours\Base\Behaviour.cs" />
     <Compile Include="Behaviours\Bonus.cs" />
-    <Compile Include="Behaviours\GhostRemover.cs" />
     <Compile Include="Colors\ColorConverter.cs" />
     <Compile Include="Behaviours\Creep.cs" />
     <Compile Include="Behaviours\CreepSpawn.cs" />
     <Compile Include="Behaviours\Energizer.cs" />
     <Compile Include="Behaviours\Food.cs" />
     <Compile Include="Enums\GameResult.cs" />
-    <Compile Include="EventArgs\EnergizerPickupEventArgs.cs" />
+    <Compile Include="EventArgData\EnergizerPickupEventArgs.cs" />
     <Compile Include="FileSystem\FileManager.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Behaviours\Ghost.cs" />
@@ -71,7 +70,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Behaviours\Wall.cs" />
-    <Compile Include="World\GhostRemoverSpawner.cs" />
     <Compile Include="Structures\PostGameData.cs" />
     <Compile Include="UI\Controls\Button.cs" />
     <Compile Include="UI\Enums\OriginMode.cs" />

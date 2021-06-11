@@ -6,13 +6,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.FileSystem;
 using MonoGame.Behaviours.Base;
+using MonoGame.Enums;
+using MonoGame.EventArgData;
+using MonoGame.Structures;
 
 namespace MonoGame.Behaviours {
 	public class Player : Behaviour {
 
 		public event EventHandler<EnergizerPickupEventArgs> OnEnergizerPickup;
 
-		public override Vector2 Position { get; protected set; }
+		public override Vector2 Position { get; set; }
 		protected override Vector2 Scale { get; set; }
 		public override Vector2 Size { get; protected set; }
 
@@ -28,19 +31,22 @@ namespace MonoGame.Behaviours {
 		public const string TEXTURE_ID = "pacman";
 		public const string POWERUP_SHADER_ID = "rainbow";
 
-		public const int FOOD_VALUE = 10;
-		public const int FRUIT_VALUE = 200;
-		public const int GHOST_VALUE = 500;
-		public float Speed { get; set; } = 4;
+		private const int FOOD_VALUE = 10;
+		private const int FRUIT_VALUE = 200;
+		private const int GHOST_VALUE = 500;
+
+		private float Speed { get; set; } = 4;
 		public int FoodCollected { get; private set; } = 0;
 		public int FruitsCollected { get; private set; } = 0;
 		public int GhostsEaten { get; private set; } = 0;
 
-		public readonly DateTime Start;
+		public readonly DateTime start;
+
+		private int PowerupAmount { get; set; }
 
 		public Player(Vector2 position) {
 			Setup(position, TEXTURE_ID + textureOffset);
-			Start = DateTime.Now;
+			start = DateTime.Now;
 		}
 
 		public override void Update(GameTime time) {
@@ -64,24 +70,18 @@ namespace MonoGame.Behaviours {
 			if (GameWorld.Instance.IsOverFood(Position, out Food foundF)) {
 				GameWorld.Instance.RemoveFood(foundF);
 				FoodCollected++;
-				if (FoodCollected == World.Instance.TotalFoodOnMap) {
+				if (FoodCollected == GameWorld.Instance.TotalFoodOnMap) {
 					FileManager.Save(this);
 					Game.Instance.SceneManager.SwitchToPostGame(new PostGameData(this, GameResult.Win));
 					//TODO Win
 				}
 			}
 
-			if (World.Instance.IsOverEnergizer(Position, out Energizer foundE)) {
-				World.Instance.RemoveEnergizer(foundE);
+			if (GameWorld.Instance.IsOverEnergizer(Position, out Energizer foundE)) {
 				energizersPickedUp++;
 				OnEnergizerPickup?.Invoke(this, new EnergizerPickupEventArgs(foundE, energizersPickedUp));
 				Speed += 1;
-			}
-
-			if (GameWorld.Instance.IsOverGhostRemover(Position, out GhostRemover foundR)) {
-				GameWorld.Instance.RemoveGhostRemover(foundR);
-				CanEatGhosts = true;
-				PowerupAmount = 300;
+				PowerupAmount = 400 + energizersPickedUp * 200;
 			}
 
 			if (GameWorld.Instance.IsOverBonus(Position, out Bonus foundB)) {
@@ -89,7 +89,7 @@ namespace MonoGame.Behaviours {
 				FruitsCollected++;
 			}
 
-			if (World.Instance.IsOverGhost(Position, out Ghost foundG)) {
+			if (GameWorld.Instance.IsOverGhost(Position, out Ghost foundG)) {
 				if (foundG.IsAfraid) {
 					GhostsEaten++;
 					foundG.Respawn();

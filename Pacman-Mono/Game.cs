@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.UI;
 using MonoGame.Behaviours;
-using MonoGame.World;
+using MonoGame.Scenes;
+using MonoGame.Scenes.Base;
+using MonoGame.Scenes.Enum;
+using MonoGame.UI.Controls;
 
 namespace MonoGame {
 	/// <summary>
@@ -18,8 +20,6 @@ namespace MonoGame {
 		public const int WINDOW_SIZE_Y = 1000;
 
 		public static Random Random { get; } = new Random();
-
-		private GameWorld world;
 
 		public static Dictionary<string, Texture2D> Sprites { get; } = new Dictionary<string, Texture2D>();
 		public static Dictionary<string, Effect> Shaders { get; } = new Dictionary<string, Effect>();
@@ -58,7 +58,6 @@ namespace MonoGame {
 			Sprites.Add(Ghost.TEXTURE_ID_EYES, Content.Load<Texture2D>(Ghost.TEXTURE_ID_EYES));
 			Sprites.Add(Wall.TEXTURE_ID, Content.Load<Texture2D>(Wall.TEXTURE_ID));
 			Sprites.Add(Energizer.TEXTURE_ID, Content.Load<Texture2D>(Energizer.TEXTURE_ID));
-			Sprites.Add(GhostRemover.TEXTURE_ID, Content.Load<Texture2D>(GhostRemover.TEXTURE_ID));
 			Sprites.Add(Food.TEXTURE_ID, Content.Load<Texture2D>(Food.TEXTURE_ID));
 			Sprites.Add(Creep.TEXTURE_ID, Content.Load<Texture2D>(Creep.TEXTURE_ID));
 			Sprites.Add(Bonus.TEXTURE_ID, Content.Load<Texture2D>(Bonus.TEXTURE_ID));

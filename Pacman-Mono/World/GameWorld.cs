@@ -6,6 +6,7 @@ using MonoGame.AI;
 using MonoGame.Behaviours;
 using MonoGame.Behaviours.Base;
 using MonoGame.Colors;
+using MonoGame.EventArgData;
 
 namespace MonoGame.World {
 	public class GameWorld {
@@ -22,7 +23,6 @@ namespace MonoGame.World {
 		private readonly List<Food> food = new List<Food>();
 		private readonly List<Ghost> ghosts = new List<Ghost>();
 		private readonly List<Energizer> energizers = new List<Energizer>();
-		private readonly List<GhostRemover> ghostRemovers = new List<GhostRemover>();
 		private readonly List<Point> openSpaces = new List<Point>();
 
 		private BonusSpawner bonusSpawner;
@@ -52,7 +52,6 @@ namespace MonoGame.World {
 
 		private void Setup() {
 			bonusSpawner = new BonusSpawner();
-			ghostRemoverSpawner = new GhostRemoverSpawner();
 
 			for (int i = 0; i < SelectedWorldSizeX; i++) {
 				for (int j = 0; j < SelectedWorldSizeY; j++) {
@@ -72,12 +71,12 @@ namespace MonoGame.World {
 					}
 					if (SelectedWorld[j, i] == 'G') {
 						ghosts.Add(new Ghost(new Vector2(i * CellSizeX, j * CellSizeY), typeof(BasicAI)) {
-							Tint = HSV.ColorFromHue(Game.Random.NextDouble() * 360)
+							Tint = ColorConverter.ColorFromHue(Game.Random.NextDouble() * 360)
 						});
 					}
 					if (SelectedWorld[j, i] == 'H') {
 						ghosts.Add(new Ghost(new Vector2(i * CellSizeX, j * CellSizeY), typeof(ChaserAI)) {
-							Tint = HSV.ColorFromHue(Game.Random.NextDouble() * 360),
+							Tint = ColorConverter.ColorFromHue(Game.Random.NextDouble() * 360),
 						});
 					}
 					if (SelectedWorld[j, i] == 'E') {
@@ -123,7 +122,6 @@ namespace MonoGame.World {
 
 		public bool IsOverFood(Vector2 position, out Food found) => IsOverBehaviour(position, food, FOOD_DISTANCE_THRESHOLD_SQUARED, out found);
 		public bool IsOverEnergizer(Vector2 position, out Energizer found) => IsOverBehaviour(position, energizers, ENERGIZER_DISTANCE_THRESHOLD_SQUARED, out found);
-		public bool IsOverGhostRemover(Vector2 position, out GhostRemover found) => IsOverBehaviour(position, ghostRemovers, GHOST_REMOVER_DISTANCE_THRESHOLD_SQUARED, out found);
 		public bool IsOverBonus(Vector2 position, out Bonus found) => IsOverBehaviour(position, Bonus, BONUS_DISTANCE_THRESHOLD_SQUARED, out found);
 		public bool IsOverGhost(Vector2 position, out Ghost found) => IsOverBehaviour(position, ghosts, GHOST_DISTANCE_THRESHOLD_SQUARED, out found);
 
@@ -148,7 +146,6 @@ namespace MonoGame.World {
 
 		public void RemoveFood(Food cherry) => food.Remove(cherry);
 		public void RemoveEnergizer(Energizer energizer) => energizers.Remove(energizer);
-		public void RemoveGhostRemover(GhostRemover ghostRemover) { ghostRemover.Collect(); ghostRemovers.Remove(ghostRemover); }
 		public void RemoveBonus(Bonus bonus) { bonus.Collect(); Bonus = null; }
 
 		#endregion
@@ -156,6 +153,7 @@ namespace MonoGame.World {
 		#region Events
 
 		private void Player_OnEnergizerPickup(object sender, EnergizerPickupEventArgs e) {
+			RemoveEnergizer(e.Energizer);
 			foreach (Ghost gh in ghosts) {
 				gh.Scare(e.TotalCollected);
 			}
@@ -174,17 +172,10 @@ namespace MonoGame.World {
 			return Bonus = new Bonus(position);
 		}
 
-		public GhostRemover SpawnGhostRemover(Vector2 position) {
-			GhostRemover ghostRemover = new GhostRemover(position);
-			ghostRemovers.Add(ghostRemover);
-			return ghostRemover;
-		}
-
 		public void Update(GameTime time) {
 			Player.Update(time);
 			Creep?.Update(time);
 			bonusSpawner.Update(time);
-			ghostRemoverSpawner.Update(time);
 			Bonus?.Update(time);
 			foreach (Ghost g in ghosts) {
 				g.Update(time);
@@ -205,9 +196,6 @@ namespace MonoGame.World {
 			}
 			foreach (Energizer energizer in energizers) {
 				energizer.Draw(time, batch);
-			}
-			foreach (GhostRemover remover in ghostRemovers) {
-				remover.Draw(time, batch);
 			}
 			Player.Draw(time, batch);
 		}

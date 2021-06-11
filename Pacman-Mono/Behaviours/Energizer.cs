@@ -4,7 +4,7 @@ using MonoGame.Behaviours.Base;
 
 namespace MonoGame.Behaviours {
 	public class Energizer : Behaviour {
-		public override Vector2 Position { get; protected set; }
+		public override Vector2 Position { get; set; }
 
 		protected override Vector2 Scale { get; set; }
 

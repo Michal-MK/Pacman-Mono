@@ -1,5 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.Xna.Framework;
+using MonoGame.AI.Base;
+using MonoGame.Behaviours.Base;
+using MonoGame.Structures;
+using MonoGame.World;
 
 namespace MonoGame.AI {
 	public class BasicAI : IGridAI {
@@ -25,7 +29,7 @@ namespace MonoGame.AI {
 
 		public virtual void UpdateAgent(GameTime time) {
 			if (!animate) {
-				Point[] targets = Grid.GetEmptyNeighborsIgnoreVisited(World.Instance.GridCoordinates(Behaviour.Position));
+				Point[] targets = Grid.GetEmptyNeighborsIgnoreVisited(GameWorld.Instance.GridCoordinates(Behaviour.Position));
 				if (targets.Length == 1 && targets[0] == previousTarget) {
 					SelectTarget(previousTarget);
 				}
@@ -45,7 +49,7 @@ namespace MonoGame.AI {
 		private void SelectTarget(Point selected) {
 			target = selected;
 			initialPosition = Behaviour.Position;
-			Vector2 diff = (World.Instance.WorldCoordinates(target) + Behaviour.Size * 0.5f) - initialPosition;
+			Vector2 diff = (GameWorld.Instance.WorldCoordinates(target) + Behaviour.Size * 0.5f) - initialPosition;
 			targetPosition = initialPosition + diff;
 
 			animate = true;
@@ -53,7 +57,7 @@ namespace MonoGame.AI {
 		}
 
 		protected void Animate() {
-			animationProgress += Behaviour.AnimationSpeed;
+			animationProgress += GridAnimatedBehaviour.ANIMATION_SPEED;
 			if (animationProgress >= 1) {
 				animationProgress = 1;
 				animate = false;
