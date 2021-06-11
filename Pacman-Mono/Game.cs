@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Behaviours;
+using MonoGame.World;
 
 namespace MonoGame {
 	/// <summary>
@@ -16,9 +18,10 @@ namespace MonoGame {
 
 		public static Random Random { get; } = new Random();
 
-		private World world;
+		private GameWorld world;
 
 		public static Dictionary<string, Texture2D> Sprites { get; } = new Dictionary<string, Texture2D>();
+		public static Dictionary<string, Effect> Shaders { get; } = new Dictionary<string, Effect>();
 		public static SpriteFont Font { get; set; }
 
 		public Game() {
@@ -47,16 +50,19 @@ namespace MonoGame {
 			Sprites.Add(Ghost.TEXTURE_ID_EYES, Content.Load<Texture2D>(Ghost.TEXTURE_ID_EYES));
 			Sprites.Add(Wall.TEXTURE_ID, Content.Load<Texture2D>(Wall.TEXTURE_ID));
 			Sprites.Add(Energizer.TEXTURE_ID, Content.Load<Texture2D>(Energizer.TEXTURE_ID));
+			Sprites.Add(GhostRemover.TEXTURE_ID, Content.Load<Texture2D>(GhostRemover.TEXTURE_ID));
 			Sprites.Add(Food.TEXTURE_ID, Content.Load<Texture2D>(Food.TEXTURE_ID));
 			Sprites.Add(Creep.TEXTURE_ID, Content.Load<Texture2D>(Creep.TEXTURE_ID));
 			Sprites.Add(Bonus.TEXTURE_ID, Content.Load<Texture2D>(Bonus.TEXTURE_ID));
 			Sprites.Add(CreepSpawn.TEXTURE_ID, Content.Load<Texture2D>(CreepSpawn.TEXTURE_ID));
+			
+			Shaders.Add(Player.POWERUP_SHADER_ID, Content.Load<Effect>(Player.POWERUP_SHADER_ID));
 			Font = Content.Load<SpriteFont>("font");
 			OnLoad();
 		}
 
 		private void OnLoad() {
-			world = new World(WorldDefinitions.LARGE_WORLD_19x19);
+			world = new GameWorld(WorldDefinitions.LARGE_WORLD_19x19);
 		}
 
 		protected override void Update(GameTime gameTime) {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace MonoGame {
+namespace MonoGame.Structures {
 	public class Graph {
 
 		public Graph(char[,] world, Point start) {
@@ -19,11 +19,11 @@ namespace MonoGame {
 			toGo.Enqueue(start);
 		}
 
-		private bool[,] visited;
-		private bool[,] graphData;
-		private Queue<Point> toGo = new Queue<Point>();
+		private readonly bool[,] visited;
+		private readonly bool[,] graphData;
+		private readonly Queue<Point> toGo = new Queue<Point>();
 
-		public bool FullyDiscovered { get; internal set; }
+		public bool FullyDiscovered { get; private set; }
 
 		public Point[] IterateBFS() {
 			List<Point> ret = new List<Point>();
@@ -40,10 +40,12 @@ namespace MonoGame {
 					ret.Add(newlyFound);
 				}
 			}
+
+			FullyDiscovered = toGo.Count == 0;
 			return ret.ToArray();
 		}
 
-		public Point[] GetEmptyNeighbors(Point p) {
+		private Point[] GetEmptyNeighbors(Point p) {
 			List<Point> points = new List<Point>();
 
 			int xL = p.X - 1;
@@ -93,14 +95,14 @@ namespace MonoGame {
 
 
 		public void PPrint() {
-			int ndDimLenggth = visited.GetLength(1);
+			int ndDimLength = visited.GetLength(1);
 			Console.WriteLine(new string('-', 40));
 
 			Console.WriteLine("Data:");
 			for (int i = 0; i < graphData.GetLength(0); i++) {
 				Console.Write('[');
-				for (int j = 0; j < ndDimLenggth; j++) {
-					Console.Write(graphData[i, j] + (ndDimLenggth - 1 != j ? ", " : ""));
+				for (int j = 0; j < ndDimLength; j++) {
+					Console.Write(graphData[i, j] + (ndDimLength - 1 != j ? ", " : ""));
 				}
 				Console.WriteLine(']');
 			}
@@ -108,8 +110,8 @@ namespace MonoGame {
 			Console.WriteLine("Visited:");
 			for (int i = 0; i < visited.GetLength(0); i++) {
 				Console.Write('[');
-				for (int j = 0; j < ndDimLenggth; j++) {
-					Console.Write(visited[i, j] + (ndDimLenggth - 1 != j ? ", " : ""));
+				for (int j = 0; j < ndDimLength; j++) {
+					Console.Write(visited[i, j] + (ndDimLength - 1 != j ? ", " : ""));
 				}
 				Console.WriteLine(']');
 			}

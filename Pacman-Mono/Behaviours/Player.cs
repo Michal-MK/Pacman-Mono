@@ -1,27 +1,33 @@
 ﻿using System;
+using System.Diagnostics;
+using MonoGame.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Behaviours.Base;
 
-namespace MonoGame {
+namespace MonoGame.Behaviours {
 	public class Player : Behaviour {
 
-		public override Vector2 Position { get; set; }
-		public override Vector2 Scale { get; protected set; }
+		public override Vector2 Position { get; protected set; }
+		protected override Vector2 Scale { get; set; }
 		public override Vector2 Size { get; protected set; }
 
 		private float rotation = 0;
 		private int textureOffset = 1;
 		private int textureOffsetCounter = 0;
 		private bool counterRises = true;
-		bool flipTexture = false;
+		private bool flipTexture;
 
 		private const float CORRECTION_THRESHOLD = 4;
 		public const string TEXTURE_ID = "pacman";
+		public const string POWERUP_SHADER_ID = "rainbow";
 
 		public float Speed { get; set; } = 4;
 		public int FoodCollected { get; private set; } = 0;
 		public int FruitsCollected { get; private set; } = 0;
+		public bool CanEatGhosts { get; private set; }
+		public int PowerupAmount { get; private set; } = 0;
 
 
 		public Player(Vector2 position) {
@@ -44,25 +50,33 @@ namespace MonoGame {
 				}
 			}
 
-			if (World.Instance.IsOverFood(Position, out Food foundF)) {
-				World.Instance.RemoveFood(foundF);
+			PowerupAmount--;
+
+			if (GameWorld.Instance.IsOverFood(Position, out Food foundF)) {
+				GameWorld.Instance.RemoveFood(foundF);
 				FoodCollected++;
 			}
 
-			if (World.Instance.IsOverEnergizer(Position, out Energizer foundE)) {
-				World.Instance.RemoveEnergizer(foundE);
+			if (GameWorld.Instance.IsOverEnergizer(Position, out Energizer foundE)) {
+				GameWorld.Instance.RemoveEnergizer(foundE);
 				Speed += 1;
 			}
 
-			if (World.Instance.IsOverBonus(Position, out Bonus foundB)) {
-				World.Instance.RemoveBonus(foundB);
+			if (GameWorld.Instance.IsOverGhostRemover(Position, out GhostRemover foundR)) {
+				GameWorld.Instance.RemoveGhostRemover(foundR);
+				CanEatGhosts = true;
+				PowerupAmount = 300;
+			}
+
+			if (GameWorld.Instance.IsOverBonus(Position, out Bonus foundB)) {
+				GameWorld.Instance.RemoveBonus(foundB);
 				FruitsCollected++;
 			}
 
 			if (state.IsKeyDown(Keys.Down)) {
 				OrientDown();
 				Vector2 newPos = Vector2.UnitY * Speed;
-				if (World.Instance.IsValidPlayerPosition(Position + newPos, Size, out Vector2 corr)) {
+				if (GameWorld.Instance.IsValidPlayerPosition(Position + newPos, Size, out Vector2 corr)) {
 					Position += newPos;
 				}
 				else {
@@ -83,7 +97,7 @@ namespace MonoGame {
 			else if (state.IsKeyDown(Keys.Up)) {
 				OrientUp();
 				Vector2 newPos = -Vector2.UnitY * Speed;
-				if (World.Instance.IsValidPlayerPosition(Position + newPos, Size, out Vector2 corr)) {
+				if (GameWorld.Instance.IsValidPlayerPosition(Position + newPos, Size, out Vector2 corr)) {
 					Position += newPos;
 				}
 				else {
@@ -104,7 +118,7 @@ namespace MonoGame {
 			else if (state.IsKeyDown(Keys.Left)) {
 				OrientLeft();
 				Vector2 newPos = -Vector2.UnitX * Speed;
-				if (World.Instance.IsValidPlayerPosition(Position + newPos, Size, out Vector2 corr)) {
+				if (GameWorld.Instance.IsValidPlayerPosition(Position + newPos, Size, out Vector2 corr)) {
 					Position += newPos;
 				}
 				else {
@@ -125,7 +139,7 @@ namespace MonoGame {
 			else if (state.IsKeyDown(Keys.Right)) {
 				OrientRight();
 				Vector2 newPos = Vector2.UnitX * Speed;
-				if (World.Instance.IsValidPlayerPosition(Position + newPos, Size, out Vector2 corr)) {
+				if (GameWorld.Instance.IsValidPlayerPosition(Position + newPos, Size, out Vector2 corr)) {
 					Position += newPos;
 				}
 				else {
@@ -166,9 +180,18 @@ namespace MonoGame {
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
+			if (PowerupAmount > 0) {
+				batch.End();
+				Game.Shaders[POWERUP_SHADER_ID].Parameters["time"].SetValue((float)time.TotalGameTime.TotalMilliseconds);
+				batch.Begin(SpriteSortMode.Texture, effect: Game.Shaders[POWERUP_SHADER_ID]);
+			}
 			Texture2D tx = Game.Sprites[TEXTURE_ID + textureOffset];
 			batch.Draw(tx, Position, tx.Bounds, Color.White, rotation, tx.Bounds.Center.ToVector2(), Scale, flipTexture ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
-			batch.DrawString(Game.Font, $"Food collected: {FoodCollected}/{World.Instance.TotalFoodOnMap}", Vector2.One * 20, Color.White);
+			if (PowerupAmount > 0) {
+				batch.End();
+				batch.Begin();
+			}
+			batch.DrawString(Game.Font, $"Food collected: {FoodCollected}/{GameWorld.Instance.TotalFoodOnMap}", Vector2.One * 20, Color.White);
 			batch.DrawString(Game.Font, $"Fruits Collected: {FruitsCollected}", Vector2.One * 20 + Vector2.UnitY * 16, Color.White);
 			batch.DrawString(Game.Font, $"Total Points: {FoodCollected * 10 + FruitsCollected * 200}", Vector2.One * 20 + Vector2.UnitY * 32, Color.White);
 		}

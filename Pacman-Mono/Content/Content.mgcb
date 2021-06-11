@@ -104,6 +104,18 @@
 /processorParam:TextureFormat=Color
 /build:ghost/ghost_shape.png
 
+#begin no_ghost.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:no_ghost.png
+
 #begin pacman1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -151,6 +163,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:pacman4.png
+
+#begin Rainbow.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Rainbow.fx;rainbow.fx
 
 #begin wall.png
 /importer:TextureImporter

@@ -1,42 +1,43 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
+using MonoGame.Behaviours;
 
-namespace MonoGame {
+namespace MonoGame.World {
 	public class BonusSpawner {
-
-		public const int MIN_SPAWN_THRESHOLD = 500;
-		public const int MAX_SPAWN_THRESHOLD = 2000;
+		private const int MIN_SPAWN_THRESHOLD = 500;
+		private const int MAX_SPAWN_THRESHOLD = 2000;
 
 		private int counter;
 		private int spawnTrigger;
 
 		public bool BonusSpawned { get; private set; }
+
 		private Bonus bonus;
 
 		public BonusSpawner() {
 			spawnTrigger = Game.Random.Next(MIN_SPAWN_THRESHOLD, MAX_SPAWN_THRESHOLD);
 		}
 
-		public void Update(GameTime time) {
+		public void Update(GameTime _) {
 			if (!BonusSpawned) {
 				counter++;
 			}
+			if (counter != spawnTrigger) return;
 
-			if (counter == spawnTrigger) {
-				SpawnBonus();
-				counter = 0;
-				spawnTrigger = Game.Random.Next(MIN_SPAWN_THRESHOLD, MAX_SPAWN_THRESHOLD);
-			}
+			SpawnBonus();
+			counter = 0;
+			spawnTrigger = Game.Random.Next(MIN_SPAWN_THRESHOLD, MAX_SPAWN_THRESHOLD);
 		}
 
-		public void SpawnBonus() {
+		private void SpawnBonus() {
 			BonusSpawned = true;
-			bonus = World.Instance.SpawnBonus(World.Instance.WorldCoordinates(World.Instance.GetRandomOpenSpot()));
+			bonus = GameWorld.Instance.SpawnBonus(GameWorld.Instance.WorldCoordinates(GameWorld.Instance.GetRandomOpenSpot()));
 			bonus.OnCollected += OnBonusCollected;
 		}
 
-		private void OnBonusCollected(object sender, Bonus casted) {
+		private void OnBonusCollected(object sender, EventArgs e) {
 			BonusSpawned = false;
-			casted.OnCollected -= OnBonusCollected;
+			((Bonus)sender).OnCollected -= OnBonusCollected;
 		}
 	}
 }

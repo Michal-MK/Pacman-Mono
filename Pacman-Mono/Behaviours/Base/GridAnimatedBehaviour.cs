@@ -1,18 +1,20 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.Xna.Framework;
+using MonoGame.Structures;
+using MonoGame.World;
 
-namespace MonoGame {
+namespace MonoGame.Behaviours.Base {
 	public abstract class GridAnimatedBehaviour : Behaviour {
 
-		protected Graph Grid { get; set; }
+		private const float ANIMATION_SPEED = 0.04f;
 
-		private Vector2 _position;
-		public override Vector2 Position { get => _position; set => _position = value; }
+		private Graph Grid { get; }
 
-		public float AnimationSpeed { get; set; } = 0.04f;
+		private Vector2 position;
+		public override Vector2 Position { get => position; protected set => position = value; }
 
 		#region Private animation
+
 		private bool animate;
 		private Point target;
 		private Point previousTarget;
@@ -22,13 +24,13 @@ namespace MonoGame {
 
 		#endregion
 
-		public GridAnimatedBehaviour(char[,] world, Point start) {
+		protected GridAnimatedBehaviour(char[,] world, Point start) {
 			Grid = WorldHelper.GenerateGraphOfOpenSpaces(world, start);
 		}
 
 		public override void Update(GameTime time) {
 			if (!animate) {
-				Point[] targets = Grid.GetEmptyNeighborsIgnoreVisited(World.Instance.GridCoordinates(Position));
+				Point[] targets = Grid.GetEmptyNeighborsIgnoreVisited(GameWorld.Instance.GridCoordinates(Position));
 				if (targets.Length == 1 && targets[0] == previousTarget) {
 					SelectTarget(previousTarget);
 				}
@@ -48,7 +50,7 @@ namespace MonoGame {
 		private void SelectTarget(Point selected) {
 			target = selected;
 			initialPosition = Position;
-			Vector2 diff = (World.Instance.WorldCoordinates(target) + Size * 0.5f) - initialPosition;
+			Vector2 diff = (GameWorld.Instance.WorldCoordinates(target) + Size * 0.5f) - initialPosition;
 			targetPosition = initialPosition + diff;
 
 			animate = true;
@@ -56,12 +58,12 @@ namespace MonoGame {
 		}
 
 		private void Animate() {
-			animationProgress += AnimationSpeed;
+			animationProgress += ANIMATION_SPEED;
 			if (animationProgress >= 1) {
 				animationProgress = 1;
 				animate = false;
 			}
-			Vector2.Lerp(ref initialPosition, ref targetPosition, animationProgress, out _position);
+			Vector2.Lerp(ref initialPosition, ref targetPosition, animationProgress, out position);
 		}
 	}
 }

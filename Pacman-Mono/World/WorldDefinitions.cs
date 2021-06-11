@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MonoGame {
+﻿namespace MonoGame.World {
 	public static class WorldDefinitions {
 
 		public static readonly char[,] DEFAULT_WORLD_9x9 = new char[9, 9] {

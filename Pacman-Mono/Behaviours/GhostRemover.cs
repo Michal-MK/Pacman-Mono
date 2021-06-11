@@ -4,14 +4,14 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Behaviours.Base;
 
 namespace MonoGame.Behaviours {
-	public class Bonus : Behaviour {
-		public override Vector2 Position { get; protected set; }
+	public class GhostRemover : Behaviour {
+		public const string TEXTURE_ID = "no_ghost";
 
 		public event EventHandler OnCollected;
 
-		public const string TEXTURE_ID = "bonus";
+		public override Vector2 Position { get; protected set; }
 
-		public Bonus(Vector2 position) {
+		public GhostRemover(Vector2 position) {
 			Setup(position, TEXTURE_ID);
 		}
 

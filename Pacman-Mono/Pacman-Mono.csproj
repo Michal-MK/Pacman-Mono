@@ -45,7 +45,8 @@
   <ItemGroup>
     <Compile Include="Behaviours\Base\Behaviour.cs" />
     <Compile Include="Behaviours\Bonus.cs" />
-    <Compile Include="Colors\HSV.cs" />
+    <Compile Include="Behaviours\GhostRemover.cs" />
+    <Compile Include="Colors\ColorConverter.cs" />
     <Compile Include="Behaviours\Creep.cs" />
     <Compile Include="Behaviours\CreepSpawn.cs" />
     <Compile Include="Behaviours\Energizer.cs" />
@@ -58,8 +59,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Behaviours\Wall.cs" />
+    <Compile Include="World\GhostRemoverSpawner.cs" />
     <Compile Include="World\BonusSpawner.cs" />
-    <Compile Include="World\World.cs" />
+    <Compile Include="World\GameWorld.cs" />
     <Compile Include="World\WorldDefinitions.cs" />
     <Compile Include="World\WorldHelper.cs" />
   </ItemGroup>
@@ -77,48 +79,48 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
       <Link>x86\SDL2.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\SDL2.dll">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x64\SDL2.dll">
       <Link>x64\SDL2.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\soft_oal.dll">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x86\soft_oal.dll">
       <Link>x86\soft_oal.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\soft_oal.dll">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x64\soft_oal.dll">
       <Link>x64\soft_oal.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libSDL2-2.0.so.0">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libSDL2-2.0.so.0">
       <Link>x86\libSDL2-2.0.so.0</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libSDL2-2.0.so.0">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libSDL2-2.0.so.0">
       <Link>x64\libSDL2-2.0.so.0</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libopenal.so.1">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libopenal.so.1">
       <Link>x86\libopenal.so.1</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libopenal.so.1">
+    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libopenal.so.1">
       <Link>x64\libopenal.so.1</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\libSDL2-2.0.0.dylib">
-      <Link>libSDL2-2.0.0.dylib</Link>
+      <Link>_Engine\libSDL2-2.0.0.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\libopenal.1.dylib">
-      <Link>libopenal.1.dylib</Link>
+      <Link>_Engine\libopenal.1.dylib</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll.config">
-      <Link>MonoGame.Framework.dll.config</Link>
+      <Link>_Engine\MonoGame.Framework.dll.config</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="_Engine\app.config" />
