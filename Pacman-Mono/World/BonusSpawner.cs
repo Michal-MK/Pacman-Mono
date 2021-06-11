@@ -39,5 +39,13 @@ namespace MonoGame.World {
 			BonusSpawned = false;
 			((Bonus)sender).OnCollected -= OnBonusCollected;
 		}
+
+		public void DespawnBonus() {
+			if(bonus != null) {
+				bonus.OnCollected -= OnBonusCollected;
+			}
+			BonusSpawned = false;
+			World.Instance.SpawnBonus(World.Instance.WorldCoordinates(World.Instance.GetRandomOpenSpot()));
+		}
 	}
 }
