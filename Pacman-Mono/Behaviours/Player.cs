@@ -9,6 +9,8 @@ using MonoGame.Behaviours.Base;
 using MonoGame.Enums;
 using MonoGame.EventArgData;
 using MonoGame.Structures;
+using MonoGame.Extended.BitmapFonts;
+
 
 namespace MonoGame.Behaviours {
 	public class Player : Behaviour {

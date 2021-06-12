@@ -1,154 +1,38 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B1161861-19D3-49AA-8E5C-DAB156AE6148}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MonoGame</RootNamespace>
-    <AssemblyName>MonoGame</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <MonoGamePlatform>DesktopGL</MonoGamePlatform>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;LINUX</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>false</Prefer32Bit>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
-    <DefineConstants>TRACE;LINUX</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>false</Prefer32Bit>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>_Engine\Icon.ico</ApplicationIcon>
+    <ApplicationManifest>_Engine/app.manifest</ApplicationManifest>
+    <ApplicationIcon>_Engine/Icon.ico</ApplicationIcon>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>_Engine\app.manifest</ApplicationManifest>
-  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AI\BasicAI.cs" />
-    <Compile Include="AI\Base\IGridAI.cs" />
-    <Compile Include="AI\ChaserAI.cs" />
-    <Compile Include="Behaviours\Base\Behaviour.cs" />
-    <Compile Include="Behaviours\Bonus.cs" />
-    <Compile Include="Colors\ColorConverter.cs" />
-    <Compile Include="Behaviours\Creep.cs" />
-    <Compile Include="Behaviours\CreepSpawn.cs" />
-    <Compile Include="Behaviours\Energizer.cs" />
-    <Compile Include="Behaviours\Food.cs" />
-    <Compile Include="Enums\GameResult.cs" />
-    <Compile Include="EventArgData\EnergizerPickupEventArgs.cs" />
-    <Compile Include="FileSystem\FileManager.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="Behaviours\Ghost.cs" />
-    <Compile Include="Scenes\Base\Scene.cs" />
-    <Compile Include="Scenes\Enum\ActiveScene.cs" />
-    <Compile Include="Scenes\GameScene.cs" />
-    <Compile Include="Scenes\MenuScene.cs" />
-    <Compile Include="Scenes\PostGameScene.cs" />
-    <Compile Include="Scenes\SceneManager.cs" />
-    <Compile Include="Structures\Graph.cs" />
-    <Compile Include="Behaviours\Base\GridAnimatedBehaviour.cs" />
-    <Compile Include="Behaviours\Player.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Behaviours\Wall.cs" />
-    <Compile Include="Structures\PostGameData.cs" />
-    <Compile Include="UI\Controls\Base\UIElement.cs" />
-    <Compile Include="UI\Controls\Button.cs" />
-    <Compile Include="UI\Controls\TextControl.cs" />
-    <Compile Include="UI\Enums\OriginMode.cs" />
-    <Compile Include="World\BonusSpawner.cs" />
-    <Compile Include="World\GameWorld.cs" />
-    <Compile Include="World\WorldDefinitions.cs" />
-    <Compile Include="World\WorldHelper.cs" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\CppNet.dll" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\libmojoshader_64.dll" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\mgfxc.deps.json" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\mgfxc.dll" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\mgfxc.exe" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\mgfxc.pdb" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\mgfxc.runtimeconfig.dev.json" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\mgfxc.runtimeconfig.json" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\SharpDX.D3DCompiler.dll" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\SharpDX.D3DCompiler.xml" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\SharpDX.dll" />
+    <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\SharpDX.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="_Engine\Icon.ico" />
-    <EmbeddedResource Include="_Engine\Icon.bmp" />
-  </ItemGroup>
-  <ItemGroup>
+	<ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
-      <Link>x86\SDL2.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x64\SDL2.dll">
-      <Link>x64\SDL2.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x86\soft_oal.dll">
-      <Link>x86\soft_oal.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x64\soft_oal.dll">
-      <Link>x64\soft_oal.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libSDL2-2.0.so.0">
-      <Link>x86\libSDL2-2.0.so.0</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libSDL2-2.0.so.0">
-      <Link>x64\libSDL2-2.0.so.0</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libopenal.so.1">
-      <Link>x86\libopenal.so.1</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libopenal.so.1">
-      <Link>x64\libopenal.so.1</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\libSDL2-2.0.0.dylib">
-      <Link>_Engine\libSDL2-2.0.0.dylib</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\libopenal.1.dylib">
-      <Link>_Engine\libopenal.1.dylib</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll.config">
-      <Link>_Engine\MonoGame.Framework.dll.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="_Engine\app.config" />
-    <None Include="_Engine\app.manifest" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Extended" Version="3.8.0" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
+  </ItemGroup>
 </Project>

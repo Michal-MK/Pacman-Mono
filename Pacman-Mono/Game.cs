@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Behaviours;
+using MonoGame.Extended.BitmapFonts;
 using MonoGame.Scenes;
 using MonoGame.Scenes.Base;
 using MonoGame.Scenes.Enum;
@@ -24,6 +25,7 @@ namespace MonoGame {
 		public static Dictionary<string, Texture2D> Sprites { get; } = new Dictionary<string, Texture2D>();
 		public static Dictionary<string, Effect> Shaders { get; } = new Dictionary<string, Effect>();
 		public static SpriteFont Font { get; set; }
+		public static BitmapFont NewFont { get; set; }
 
 		public static Game Instance { get; set; }
 
@@ -67,6 +69,7 @@ namespace MonoGame {
 			
 			Shaders.Add(Player.POWERUP_SHADER_ID, Content.Load<Effect>(Player.POWERUP_SHADER_ID));
 			Font = Content.Load<SpriteFont>("font");
+			NewFont = Content.Load<BitmapFont>("fonts/new_font");
 			OnLoad();
 		}
 
