@@ -73,6 +73,7 @@
     <Compile Include="Structures\PostGameData.cs" />
     <Compile Include="UI\Controls\Base\UIElement.cs" />
     <Compile Include="UI\Controls\Button.cs" />
+    <Compile Include="UI\Controls\TextControl.cs" />
     <Compile Include="UI\Enums\OriginMode.cs" />
     <Compile Include="World\BonusSpawner.cs" />
     <Compile Include="World\GameWorld.cs" />

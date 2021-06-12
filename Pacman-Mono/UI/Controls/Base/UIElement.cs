@@ -9,7 +9,6 @@ namespace MonoGame.UI.Controls.Base {
 
 		protected Point Position { get; }
 		protected Vector2 PositionV2 => Position.ToVector2();
-		protected OriginMode OriginMode { get; }
 
 		protected Texture2D MainTexture { get; }
 		protected bool IsMouseOver { get; set; }
@@ -20,7 +19,10 @@ namespace MonoGame.UI.Controls.Base {
 
 		protected UIElement(Point origin, string textureID, OriginMode mode) {
 			Position = origin;
-			OriginMode = mode;
+			if (textureID == null) {
+				return;
+			}
+
 			MainTexture = Game.Sprites[textureID];
 
 			if (mode == OriginMode.Center) {
@@ -35,7 +37,7 @@ namespace MonoGame.UI.Controls.Base {
 			MouseState state = Mouse.GetState();
 			(float x, float y) = PositionV2 - originOffset;
 
-			if (state.X >= x && state.Y >= y &&
+			if (MainTexture != null && state.X >= x && state.Y >= y &&
 				state.X <= x + MainTexture.Width &&
 				state.Y <= y + MainTexture.Height) {
 				IsMouseOver = true;

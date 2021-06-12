@@ -11,6 +11,7 @@ namespace MonoGame.Scenes {
 
 		private readonly Button startGameBtn;
 		private readonly Button quitGameBtn;
+		private readonly TextControl title;
 
 		public MenuScene() {
 			startGameBtn = new Button(new Point(Game.WINDOW_SIZE_X / 2, Game.WINDOW_SIZE_Y / 2), "Start game!", OriginMode.Center);
@@ -18,16 +19,20 @@ namespace MonoGame.Scenes {
 
 			quitGameBtn = new Button(new Point(Game.WINDOW_SIZE_X / 2, Game.WINDOW_SIZE_Y / 2 + 100), "Quit!", OriginMode.Center);
 			quitGameBtn.OnClick += (s, e) => { Game.Instance.Exit(); };
+
+			title = new TextControl("Pac-Man", new Point(Game.WINDOW_SIZE_X / 2,  100), null, OriginMode.Center);
 		}
 
 		public override void Update(GameTime time) {
 			startGameBtn.Update(time);
 			quitGameBtn.Update(time);
+			title.Update(time);
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
 			startGameBtn.Draw(time, batch);
 			quitGameBtn.Draw(time, batch);
+			title.Draw(time, batch);
 		}
 	}
 }
