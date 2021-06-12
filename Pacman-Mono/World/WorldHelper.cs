@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using MonoGame.Structures;
+using Pacman.Structures;
 
-namespace MonoGame.World {
+namespace Pacman.World {
 	public static class WorldHelper {
 		public static Graph GenerateGraphOfOpenSpaces(char[,] world, Point start) {
 			return new Graph(world, start);

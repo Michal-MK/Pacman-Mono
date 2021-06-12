@@ -1,4 +1,4 @@
-﻿namespace MonoGame.Scenes.Enum {
+﻿namespace Pacman.Scenes.Enum {
 	public enum ActiveScene {
 		Menu,
 		Game,

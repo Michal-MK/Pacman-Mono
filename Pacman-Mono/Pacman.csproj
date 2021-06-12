@@ -9,6 +9,7 @@
     <ApplicationManifest>_Engine/app.manifest</ApplicationManifest>
     <ApplicationIcon>_Engine/Icon.ico</ApplicationIcon>
     <LangVersion>latest</LangVersion>
+    <RootNamespace>Pacman</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="C:\Users\Michal\.nuget\packages\monogame.extended\3.8.0\contentFiles\any\netstandard2.0\CppNet.dll" />

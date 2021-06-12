@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Behaviours.Base;
+using Pacman.Behaviours.Base;
 
-namespace MonoGame.Behaviours {
+namespace Pacman.Behaviours {
 	public class CreepSpawn : Behaviour {
 
 		public const string TEXTURE_ID = "creep_spawn";

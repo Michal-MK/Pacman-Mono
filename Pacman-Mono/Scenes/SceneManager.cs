@@ -1,19 +1,19 @@
 ﻿using System;
-using MonoGame.Scenes.Enum;
-using MonoGame.Structures;
+using Pacman.Scenes.Enum;
+using Pacman.Structures;
 
-namespace MonoGame.Scenes {
+namespace Pacman.Scenes {
 	public class SceneManager {
 		public ActiveScene ActiveScene { get; set; }
 
 		public void SwitchSceneEmpty(ActiveScene scene) {
 			switch (scene) {
 				case ActiveScene.Menu: {
-					Game.Instance.CurrentScene = new MenuScene();
+					Main.Instance.CurrentScene = new MenuScene();
 					return;
 				}
 				case ActiveScene.Game: {
-					Game.Instance.CurrentScene = new GameScene();
+					Main.Instance.CurrentScene = new GameScene();
 					return;
 				}
 				case ActiveScene.PostGame: {
@@ -25,7 +25,7 @@ namespace MonoGame.Scenes {
 		}
 
 		public void SwitchToPostGame(PostGameData data) {
-			Game.Instance.CurrentScene = new PostGameScene(data);
+			Main.Instance.CurrentScene = new PostGameScene(data);
 			ActiveScene = ActiveScene.PostGame;
 		}
 	}

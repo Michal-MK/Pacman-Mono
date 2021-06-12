@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
-using MonoGame.Behaviours.Base;
-using MonoGame.Structures;
+using Pacman.Behaviours.Base;
+using Pacman.Structures;
 
-namespace MonoGame.AI.Base {
+namespace Pacman.AI.Base {
 	public interface IGridAI {
 		Graph Grid { get; }
 

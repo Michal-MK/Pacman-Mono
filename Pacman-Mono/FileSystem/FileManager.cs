@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using MonoGame.Behaviours;
+using Pacman.Behaviours;
 
-namespace MonoGame.FileSystem {
+namespace Pacman.FileSystem {
 	public static class FileManager {
 		private static DirectoryInfo GameDir = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory;
 

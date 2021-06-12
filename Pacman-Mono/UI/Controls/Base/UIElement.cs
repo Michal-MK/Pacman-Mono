@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.UI.Enums;
+using Pacman.UI.Enums;
 
-namespace MonoGame.UI.Controls.Base {
+namespace Pacman.UI.Controls.Base {
 	public class UIElement {
 
 		protected Point Position { get; }
@@ -23,7 +23,7 @@ namespace MonoGame.UI.Controls.Base {
 				return;
 			}
 
-			MainTexture = Game.Sprites[textureID];
+			MainTexture = Main.Sprites[textureID];
 
 			if (mode == OriginMode.Center) {
 				originOffset = MainTexture.Bounds.Size.ToVector2() * 0.5f;

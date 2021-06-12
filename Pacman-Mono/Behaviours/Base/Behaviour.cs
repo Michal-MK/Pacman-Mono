@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.World;
+using Pacman.World;
 
-namespace MonoGame.Behaviours.Base {
+namespace Pacman.Behaviours.Base {
 	public abstract class Behaviour {
 
 		public abstract Vector2 Position { get; set; }
@@ -15,7 +15,7 @@ namespace MonoGame.Behaviours.Base {
 
 
 		protected virtual void Setup(Vector2 position, string textureID) {
-			Texture2D tx = Game.Sprites[textureID];
+			Texture2D tx = Main.Sprites[textureID];
 			float scaleX = GameWorld.Instance.CellSizeX / tx.Width;
 			float scaleY = GameWorld.Instance.CellSizeY / tx.Height;
 			Scale = new Vector2(scaleX, scaleY);
@@ -38,7 +38,7 @@ namespace MonoGame.Behaviours.Base {
 		}
 
 		protected void SimpleDraw(GameTime _, SpriteBatch batch, Color color, string textureID = null) {
-			Texture2D tex = Game.Sprites[textureID ?? texture];
+			Texture2D tex = Main.Sprites[textureID ?? texture];
 			batch.Draw(tex, Position, tex.Bounds, color, 0, tex.Bounds.Center.ToVector2(), Scale, SpriteEffects.None, 0);
 		}
 	}

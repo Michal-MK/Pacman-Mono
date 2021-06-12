@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Scenes.Base;
-using MonoGame.Scenes.Enum;
-using MonoGame.World;
+using Pacman.Scenes.Base;
+using Pacman.Scenes.Enum;
+using Pacman.World;
 
-namespace MonoGame.Scenes {
+namespace Pacman.Scenes {
 	public class GameScene : Scene {
 		public override ActiveScene SceneName => ActiveScene.Game;
 

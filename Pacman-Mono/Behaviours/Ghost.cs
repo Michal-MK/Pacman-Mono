@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Behaviours.Base;
-using MonoGame.World;
+using Pacman.Behaviours.Base;
+using Pacman.World;
 
-namespace MonoGame.Behaviours {
+namespace Pacman.Behaviours {
 	public class Ghost : GridAnimatedBehaviour {
 		protected override Vector2 Scale { get; set; }
 

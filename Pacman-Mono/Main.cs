@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Behaviours;
 using MonoGame.Extended.BitmapFonts;
-using MonoGame.Scenes;
-using MonoGame.Scenes.Base;
-using MonoGame.Scenes.Enum;
-using MonoGame.UI.Controls;
+using Pacman.Behaviours;
+using Pacman.Scenes;
+using Pacman.Scenes.Base;
+using Pacman.Scenes.Enum;
+using Pacman.UI.Controls;
 
-namespace MonoGame {
+namespace Pacman {
 	/// <summary>
 	/// This is the main type for your game.
 	/// </summary>
-	public class Game : Microsoft.Xna.Framework.Game {
+	public class Main : Game {
 		private GraphicsDeviceManager GDManager { get; }
 		private SpriteBatch Renderer { get; set; }
 
@@ -22,18 +22,18 @@ namespace MonoGame {
 
 		public static Random Random { get; } = new Random();
 
-		public static Dictionary<string, Texture2D> Sprites { get; } = new Dictionary<string, Texture2D>();
-		public static Dictionary<string, Effect> Shaders { get; } = new Dictionary<string, Effect>();
+		public static Dictionary<string, Texture2D> Sprites { get; } = new();
+		public static Dictionary<string, Effect> Shaders { get; } = new();
 		public static SpriteFont Font { get; set; }
 		public static BitmapFont NewFont { get; set; }
 
-		public static Game Instance { get; set; }
+		public static Main Instance { get; set; }
 
 		public Scene CurrentScene { get; set; }
 
 		public SceneManager SceneManager { get; set; }
 
-		public Game() {
+		public Main() {
 			GDManager = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 			Instance = this;

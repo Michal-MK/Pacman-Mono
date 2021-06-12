@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.AI;
-using MonoGame.Behaviours;
-using MonoGame.Behaviours.Base;
-using MonoGame.Colors;
-using MonoGame.EventArgData;
+using Pacman.AI;
+using Pacman.Behaviours;
+using Pacman.Behaviours.Base;
+using Pacman.Colors;
+using Pacman.EventArgData;
 
-namespace MonoGame.World {
+namespace Pacman.World {
 	public class GameWorld {
 
 		public static GameWorld Instance { get; set; }
@@ -45,8 +45,8 @@ namespace MonoGame.World {
 			SelectedWorld = world;
 			SelectedWorldSizeX = world.GetLength(1);
 			SelectedWorldSizeY = world.GetLength(0);
-			CellSizeX = Game.WINDOW_SIZE_X / (float)SelectedWorldSizeX;
-			CellSizeY = Game.WINDOW_SIZE_Y / (float)SelectedWorldSizeY;
+			CellSizeX = Main.WINDOW_SIZE_X / (float)SelectedWorldSizeX;
+			CellSizeY = Main.WINDOW_SIZE_Y / (float)SelectedWorldSizeY;
 			Setup();
 		}
 
@@ -71,12 +71,12 @@ namespace MonoGame.World {
 					}
 					if (SelectedWorld[j, i] == 'G') {
 						ghosts.Add(new Ghost(new Vector2(i * CellSizeX, j * CellSizeY), typeof(BasicAI)) {
-							Tint = ColorConverter.ColorFromHue(Game.Random.NextDouble() * 360)
+							Tint = ColorConverter.ColorFromHue(Main.Random.NextDouble() * 360)
 						});
 					}
 					if (SelectedWorld[j, i] == 'H') {
 						ghosts.Add(new Ghost(new Vector2(i * CellSizeX, j * CellSizeY), typeof(ChaserAI)) {
-							Tint = ColorConverter.ColorFromHue(Game.Random.NextDouble() * 360),
+							Tint = ColorConverter.ColorFromHue(Main.Random.NextDouble() * 360),
 						});
 					}
 					if (SelectedWorld[j, i] == 'E') {
@@ -165,7 +165,7 @@ namespace MonoGame.World {
 
 		public Point GridCoordinates(Vector2 worldCoordinates) => new Point((int)(worldCoordinates.X / CellSizeX), (int)(worldCoordinates.Y / CellSizeY));
 
-		public Point GetRandomOpenSpot() => openSpaces[Game.Random.Next(0, openSpaces.Count)];
+		public Point GetRandomOpenSpot() => openSpaces[Main.Random.Next(0, openSpaces.Count)];
 
 
 		public Bonus SpawnBonus(Vector2 position) {

@@ -1,11 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended.BitmapFonts;
-using MonoGame.UI.Controls.Base;
-using MonoGame.UI.Enums;
+using Pacman.UI.Controls.Base;
+using Pacman.UI.Enums;
 
-namespace MonoGame.UI.Controls {
+namespace Pacman.UI.Controls {
 	public class TextControl : UIElement {
 
 		private float rotation;
@@ -25,7 +24,7 @@ namespace MonoGame.UI.Controls {
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
-			batch.DrawString(Game.Font, Text, PositionV2, Color.Red, rotation, new Vector2(Game.Font.MeasureString(Text).X / 2, 0), 1, SpriteEffects.None, 0.5f);
+			batch.DrawString(Main.Font, Text, PositionV2, Color.Red, rotation, new Vector2(Main.Font.MeasureString(Text).X / 2, 0), 1, SpriteEffects.None, 0.5f);
 		}
 	}
 }

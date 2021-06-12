@@ -2,11 +2,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended.BitmapFonts;
-using MonoGame.UI.Controls.Base;
-using MonoGame.UI.Enums;
+using Pacman.UI.Controls.Base;
+using Pacman.UI.Enums;
 
-namespace MonoGame.UI.Controls {
+namespace Pacman.UI.Controls {
 	public class Button : UIElement {
 
 		public const string TEXTURE_ID = "button";
@@ -14,7 +13,7 @@ namespace MonoGame.UI.Controls {
 		public event EventHandler OnClick;
 
 		private string buttonText;
-		public string ButtonText { get => buttonText; set { buttonText = value; textHalfSize = Game.Font.MeasureString(value) * 0.5f; } }
+		public string ButtonText { get => buttonText; set { buttonText = value; textHalfSize = Main.Font.MeasureString(value) * 0.5f; } }
 
 		private Vector2 textHalfSize;
 
@@ -45,7 +44,7 @@ namespace MonoGame.UI.Controls {
 				MainTexture.Bounds, IsMouseOver ? Color.Green : Color.White, 0,
 				MainTexture.Bounds.Location.ToVector2(), 1, SpriteEffects.None, 0);
 
-			batch.DrawString(Game.Font, ButtonText, Position.ToVector2() - textHalfSize, Color.DarkRed);
+			batch.DrawString(Main.Font, ButtonText, Position.ToVector2() - textHalfSize, Color.DarkRed);
 		}
 	}
 }

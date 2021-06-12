@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace MonoGame.Structures {
+namespace Pacman.Structures {
 	public class Graph {
 
 		public Graph(char[,] world, Point start) {

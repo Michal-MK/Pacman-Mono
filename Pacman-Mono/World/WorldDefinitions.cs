@@ -1,4 +1,4 @@
-﻿namespace MonoGame.World {
+﻿namespace Pacman.World {
 	public static class WorldDefinitions {
 
 		public static readonly char[,] DEFAULT_WORLD_9x9 = new char[9, 9] {

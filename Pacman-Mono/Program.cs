@@ -1,7 +1,7 @@
-﻿namespace MonoGame {
-	public static class Program {
+﻿namespace Pacman {
+	internal static class Program {
 		public static void Main() {
-			using Game game = new();
+			using Main game = new();
 			game.Run();
 		}
 	}

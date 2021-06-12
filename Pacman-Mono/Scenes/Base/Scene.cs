@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Scenes.Enum;
+using Pacman.Scenes.Enum;
 
-namespace MonoGame.Scenes.Base {
+namespace Pacman.Scenes.Base {
 	public abstract class Scene {
 
 		public abstract ActiveScene SceneName { get; }

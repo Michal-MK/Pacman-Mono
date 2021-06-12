@@ -1,8 +1,8 @@
 ﻿using System;
-using MonoGame.Behaviours;
-using MonoGame.Enums;
+using Pacman.Behaviours;
+using Pacman.Enums;
 
-namespace MonoGame.Structures {
+namespace Pacman.Structures {
 	public struct PostGameData {
 		public PostGameData(Player player, GameResult win) {
 			Result = win;

@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using MonoGame.AI.Base;
-using MonoGame.Structures;
-using MonoGame.World;
+using Pacman.AI.Base;
+using Pacman.Structures;
+using Pacman.World;
 
-namespace MonoGame.Behaviours.Base {
+namespace Pacman.Behaviours.Base {
 	public abstract class GridAnimatedBehaviour : Behaviour {
 		public const float ANIMATION_SPEED = 0.04f;
 

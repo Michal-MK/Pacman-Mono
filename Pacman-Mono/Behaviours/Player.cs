@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Diagnostics;
-using MonoGame.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.FileSystem;
-using MonoGame.Behaviours.Base;
-using MonoGame.Enums;
-using MonoGame.EventArgData;
-using MonoGame.Structures;
-using MonoGame.Extended.BitmapFonts;
+using Pacman.Behaviours.Base;
+using Pacman.Enums;
+using Pacman.EventArgData;
+using Pacman.FileSystem;
+using Pacman.Structures;
+using Pacman.World;
 
-
-namespace MonoGame.Behaviours {
+namespace Pacman.Behaviours {
 	public class Player : Behaviour {
 
 		public event EventHandler<EnergizerPickupEventArgs> OnEnergizerPickup;
@@ -74,7 +71,7 @@ namespace MonoGame.Behaviours {
 				FoodCollected++;
 				if (FoodCollected == GameWorld.Instance.TotalFoodOnMap) {
 					FileManager.Save(this);
-					Game.Instance.SceneManager.SwitchToPostGame(new PostGameData(this, GameResult.Win));
+					Main.Instance.SceneManager.SwitchToPostGame(new PostGameData(this, GameResult.Win));
 					//TODO Win
 				}
 			}
@@ -98,7 +95,7 @@ namespace MonoGame.Behaviours {
 				}
 				else {
 					//TODO Game over
-					Game.Instance.SceneManager.SwitchToPostGame(new PostGameData(this, GameResult.Loss));
+					Main.Instance.SceneManager.SwitchToPostGame(new PostGameData(this, GameResult.Loss));
 				}
 			}
 
@@ -211,19 +208,19 @@ namespace MonoGame.Behaviours {
 		public override void Draw(GameTime time, SpriteBatch batch) {
 			if (PowerupAmount > 0) {
 				batch.End();
-				Game.Shaders[POWERUP_SHADER_ID].Parameters["time"].SetValue((float)time.TotalGameTime.TotalMilliseconds);
-				batch.Begin(SpriteSortMode.Texture, effect: Game.Shaders[POWERUP_SHADER_ID]);
+				Main.Shaders[POWERUP_SHADER_ID].Parameters["time"].SetValue((float)time.TotalGameTime.TotalMilliseconds);
+				batch.Begin(SpriteSortMode.Texture, effect: Main.Shaders[POWERUP_SHADER_ID]);
 			}
-			Texture2D tx = Game.Sprites[TEXTURE_ID + textureOffset];
+			Texture2D tx = Main.Sprites[TEXTURE_ID + textureOffset];
 			batch.Draw(tx, Position, tx.Bounds, Color.White, rotation, tx.Bounds.Center.ToVector2(), Scale, flipTexture ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
 			if (PowerupAmount > 0) {
 				batch.End();
 				batch.Begin();
 			}
-			batch.DrawString(Game.Font, $"Food collected: {FoodCollected}/{GameWorld.Instance.TotalFoodOnMap}", Vector2.One * 20, Color.White);
-			batch.DrawString(Game.Font, $"Fruits Collected: {FruitsCollected}", Vector2.One * 20 + Vector2.UnitY * 16, Color.White);
-			batch.DrawString(Game.Font, $"Total Points: {FoodCollected * 10 + FruitsCollected * 200}", Vector2.One * 20 + Vector2.UnitY * 32, Color.White);
-			batch.DrawString(Game.Font, $"Total Points: {GetScore()}", Vector2.One * 20 + Vector2.UnitY * 48, Color.White);
+			batch.DrawString(Main.Font, $"Food collected: {FoodCollected}/{GameWorld.Instance.TotalFoodOnMap}", Vector2.One * 20, Color.White);
+			batch.DrawString(Main.Font, $"Fruits Collected: {FruitsCollected}", Vector2.One * 20 + Vector2.UnitY * 16, Color.White);
+			batch.DrawString(Main.Font, $"Total Points: {FoodCollected * 10 + FruitsCollected * 200}", Vector2.One * 20 + Vector2.UnitY * 32, Color.White);
+			batch.DrawString(Main.Font, $"Total Points: {GetScore()}", Vector2.One * 20 + Vector2.UnitY * 48, Color.White);
 		}
 
 		public int GetScore() {

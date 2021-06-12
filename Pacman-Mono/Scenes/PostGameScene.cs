@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Scenes.Base;
-using MonoGame.Scenes.Enum;
-using MonoGame.Structures;
-using MonoGame.UI.Controls;
-using MonoGame.UI.Enums;
+using Pacman.Scenes.Base;
+using Pacman.Scenes.Enum;
+using Pacman.Structures;
+using Pacman.UI.Controls;
+using Pacman.UI.Enums;
 
-namespace MonoGame.Scenes {
+namespace Pacman.Scenes {
 	public class PostGameScene : Scene {
 		public override ActiveScene SceneName => ActiveScene.PostGame;
 
@@ -18,11 +18,11 @@ namespace MonoGame.Scenes {
 		public PostGameScene(PostGameData data) {
 			Data = data;
 
-			menuBtn = new Button(new Point(Game.WINDOW_SIZE_X / 2, Game.WINDOW_SIZE_Y / 2), "Go to Menu!", OriginMode.Center);
-			menuBtn.OnClick += (s, e) => { Game.Instance.SceneManager.SwitchSceneEmpty(ActiveScene.Menu); };
+			menuBtn = new Button(new Point(Main.WINDOW_SIZE_X / 2, Main.WINDOW_SIZE_Y / 2), "Go to Menu!", OriginMode.Center);
+			menuBtn.OnClick += (s, e) => { Main.Instance.SceneManager.SwitchSceneEmpty(ActiveScene.Menu); };
 
-			restartGameBtn = new Button(new Point(Game.WINDOW_SIZE_X / 2, Game.WINDOW_SIZE_Y / 2 + 100), "Restart!", OriginMode.Center);
-			restartGameBtn.OnClick += (s, e) => { Game.Instance.SceneManager.SwitchSceneEmpty(ActiveScene.Game); };
+			restartGameBtn = new Button(new Point(Main.WINDOW_SIZE_X / 2, Main.WINDOW_SIZE_Y / 2 + 100), "Restart!", OriginMode.Center);
+			restartGameBtn.OnClick += (s, e) => { Main.Instance.SceneManager.SwitchSceneEmpty(ActiveScene.Game); };
 		}
 
 		public override void Update(GameTime time) {

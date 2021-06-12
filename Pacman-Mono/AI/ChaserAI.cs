@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using MonoGame.World;
+using Pacman.World;
 
-namespace MonoGame.AI {
+namespace Pacman.AI {
 	public class ChaserAI : BasicAI {
 
 		public override void UpdateAgent(GameTime time) {
@@ -35,9 +35,9 @@ namespace MonoGame.AI {
 			}).ToArray();
 
 			if (selected.Length != 0) {
-				return GameWorld.Instance.WorldCoordinates(selected[Game.Random.Next(0, selected.Length)]) + Behaviour.Size * 0.5f;
+				return GameWorld.Instance.WorldCoordinates(selected[Main.Random.Next(0, selected.Length)]) + Behaviour.Size * 0.5f;
 			}
-			return GameWorld.Instance.WorldCoordinates(points[Game.Random.Next(0, points.Length)]) + Behaviour.Size * 0.5f;
+			return GameWorld.Instance.WorldCoordinates(points[Main.Random.Next(0, points.Length)]) + Behaviour.Size * 0.5f;
 		}
 	}
 }

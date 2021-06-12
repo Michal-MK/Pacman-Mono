@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace MonoGame.Colors {
+namespace Pacman.Colors {
 	public static class ColorConverter {
 
 		public static Color ColorFromHue(double h) {

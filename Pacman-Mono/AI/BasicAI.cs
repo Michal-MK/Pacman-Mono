@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using Microsoft.Xna.Framework;
-using MonoGame.AI.Base;
-using MonoGame.Behaviours.Base;
-using MonoGame.Structures;
-using MonoGame.World;
+using Pacman.AI.Base;
+using Pacman.Behaviours.Base;
+using Pacman.Structures;
+using Pacman.World;
 
-namespace MonoGame.AI {
+namespace Pacman.AI {
 	public class BasicAI : IGridAI {
 		public Graph Grid { get; private set; }
 		public GridAnimatedBehaviour Behaviour { get; private set; }
@@ -38,7 +38,7 @@ namespace MonoGame.AI {
 				}
 				previousTarget = target;
 
-				SelectTarget(targets[Game.Random.Next(0, targets.Length)]);
+				SelectTarget(targets[Main.Random.Next(0, targets.Length)]);
 				Animate();
 			}
 			else {

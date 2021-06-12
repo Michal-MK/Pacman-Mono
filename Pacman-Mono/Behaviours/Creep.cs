@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Behaviours.Base;
-using MonoGame.Structures;
-using MonoGame.World;
+using Pacman.Behaviours.Base;
+using Pacman.Structures;
+using Pacman.World;
 
-namespace MonoGame.Behaviours {
+namespace Pacman.Behaviours {
 	public class Creep : Behaviour {
 
 		public const string TEXTURE_ID = "creep";

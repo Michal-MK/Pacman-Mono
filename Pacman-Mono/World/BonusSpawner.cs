@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using MonoGame.Behaviours;
+using Pacman.Behaviours;
 
-namespace MonoGame.World {
+namespace Pacman.World {
 	public class BonusSpawner {
 		private const int MIN_SPAWN_THRESHOLD = 500;
 		private const int MAX_SPAWN_THRESHOLD = 2000;
@@ -15,7 +15,7 @@ namespace MonoGame.World {
 		private Bonus bonus;
 
 		public BonusSpawner() {
-			spawnTrigger = Game.Random.Next(MIN_SPAWN_THRESHOLD, MAX_SPAWN_THRESHOLD);
+			spawnTrigger = Main.Random.Next(MIN_SPAWN_THRESHOLD, MAX_SPAWN_THRESHOLD);
 		}
 
 		public void Update(GameTime _) {
@@ -26,7 +26,7 @@ namespace MonoGame.World {
 
 			SpawnBonus();
 			counter = 0;
-			spawnTrigger = Game.Random.Next(MIN_SPAWN_THRESHOLD, MAX_SPAWN_THRESHOLD);
+			spawnTrigger = Main.Random.Next(MIN_SPAWN_THRESHOLD, MAX_SPAWN_THRESHOLD);
 		}
 
 		private void SpawnBonus() {

@@ -1,6 +1,6 @@
-﻿using MonoGame.Behaviours;
+﻿using Pacman.Behaviours;
 
-namespace MonoGame.EventArgData {
+namespace Pacman.EventArgData {
 	public class EnergizerPickupEventArgs : System.EventArgs {
 
 		public int TotalCollected { get; }
