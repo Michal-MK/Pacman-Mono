@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using MonoGame.Extended.BitmapFonts;
 using Pacman.UI.Controls.Base;
 using Pacman.UI.Enums;
 
@@ -9,22 +11,25 @@ namespace Pacman.UI.Controls {
 
 		private float rotation;
 		private float angle;
+		private readonly BitmapFont renderFont;
 
 		public string Text { get; set; }
 
-		public TextControl(string text, Point origin, string textureID, OriginMode mode) : base(origin, textureID, mode) {
+		public TextControl(string text, BitmapFont font, Point origin, string textureID, OriginMode mode) : base(origin, textureID, mode) {
 			Text = text;
+			renderFont = font;
 		}
 
 		public override void Update(GameTime time) {
 			base.Update(time);
-			rotation = (float) Math.Sin(angle);
+			rotation = (float)Math.Sin(angle) * 0.2f;
 			angle += 0.02f;
-			angle %= 2*(float)Math.PI;
+			angle %= 2 * (float)Math.PI;
 		}
 
 		public override void Draw(GameTime time, SpriteBatch batch) {
-			batch.DrawString(Main.Font, Text, PositionV2, Color.Red, rotation, new Vector2(Main.Font.MeasureString(Text).X / 2, 0), 1, SpriteEffects.None, 0.5f);
+			Size2 measure = renderFont.MeasureString(Text);
+			batch.DrawString(renderFont, Text, PositionV2, Color.Red, rotation, measure / 2, 1, SpriteEffects.None, 0.5f);
 		}
 	}
 }

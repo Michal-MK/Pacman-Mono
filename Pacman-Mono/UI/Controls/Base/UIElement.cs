@@ -11,7 +11,7 @@ namespace Pacman.UI.Controls.Base {
 		protected Vector2 PositionV2 => Position.ToVector2();
 
 		protected Texture2D MainTexture { get; }
-		protected bool IsMouseOver { get; set; }
+		protected bool IsMouseOver { get; private set; }
 
 		public event EventHandler<MouseState> MouseOver;
 

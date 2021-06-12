@@ -3,7 +3,7 @@ using Pacman.Behaviours;
 using Pacman.Enums;
 
 namespace Pacman.Structures {
-	public struct PostGameData {
+	public readonly struct PostGameData {
 		public PostGameData(Player player, GameResult win) {
 			Result = win;
 			GhostsEaten = player.GhostsEaten;

@@ -39,13 +39,5 @@ namespace Pacman.World {
 			BonusSpawned = false;
 			((Bonus)sender).OnCollected -= OnBonusCollected;
 		}
-
-		public void DespawnBonus() {
-			if(bonus != null) {
-				bonus.OnCollected -= OnBonusCollected;
-			}
-			BonusSpawned = false;
-			GameWorld.Instance.SpawnBonus(GameWorld.Instance.WorldCoordinates(GameWorld.Instance.GetRandomOpenSpot()));
-		}
 	}
 }

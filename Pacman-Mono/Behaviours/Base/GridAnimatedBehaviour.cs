@@ -16,7 +16,7 @@ namespace Pacman.Behaviours.Base {
 			Grid = WorldHelper.GenerateGraphOfOpenSpaces(world, start);
 		}
 
-		public void AddAI(Type aiType) {
+		protected void AddAI(Type aiType) {
 			AI = (IGridAI)Activator.CreateInstance(aiType);
 		}
 

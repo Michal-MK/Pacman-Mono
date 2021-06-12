@@ -20,7 +20,7 @@ namespace Pacman.Scenes {
 			quitGameBtn = new Button(new Point(Main.WINDOW_SIZE_X / 2, Main.WINDOW_SIZE_Y / 2 + 100), "Quit!", OriginMode.Center);
 			quitGameBtn.OnClick += (s, e) => { Main.Instance.Exit(); };
 
-			title = new TextControl("Pac-Man", new Point(Main.WINDOW_SIZE_X / 2,  100), null, OriginMode.Center);
+			title = new TextControl("Pac-Man", Main.NewFont, new Point(Main.WINDOW_SIZE_X / 2, 100), null, OriginMode.Center);
 		}
 
 		public override void Update(GameTime time) {

@@ -125,7 +125,7 @@ namespace Pacman.World {
 		public bool IsOverBonus(Vector2 position, out Bonus found) => IsOverBehaviour(position, Bonus, BONUS_DISTANCE_THRESHOLD_SQUARED, out found);
 		public bool IsOverGhost(Vector2 position, out Ghost found) => IsOverBehaviour(position, ghosts, GHOST_DISTANCE_THRESHOLD_SQUARED, out found);
 
-		public static bool IsOverBehaviour<T>(Vector2 position, IEnumerable<T> behaviours, int threshold, out T found) where T : Behaviour {
+		private static bool IsOverBehaviour<T>(Vector2 position, IEnumerable<T> behaviours, int threshold, out T found) where T : Behaviour {
 			foreach (T behaviour in behaviours) {
 				if (Vector2.DistanceSquared(behaviour.Position, position) < threshold) {
 					found = behaviour;
@@ -136,7 +136,7 @@ namespace Pacman.World {
 			return false;
 		}
 
-		public static bool IsOverBehaviour<T>(Vector2 position, T behaviour, int threshold, out T found) where T : Behaviour {
+		private static bool IsOverBehaviour<T>(Vector2 position, T behaviour, int threshold, out T found) where T : Behaviour {
 			found = behaviour;
 			if (behaviour == null) {
 				return false;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.BitmapFonts;
+using MonoGame.Extended.Screens;
 using Pacman.Behaviours;
 using Pacman.Scenes;
 using Pacman.Scenes.Base;
@@ -24,14 +25,11 @@ namespace Pacman {
 
 		public static Dictionary<string, Texture2D> Sprites { get; } = new();
 		public static Dictionary<string, Effect> Shaders { get; } = new();
-		public static SpriteFont Font { get; set; }
+		public static SpriteFont Font { get; private set; }
 		public static BitmapFont NewFont { get; set; }
 
-		public static Main Instance { get; set; }
-
-		public Scene CurrentScene { get; set; }
-
-		public SceneManager SceneManager { get; set; }
+		public static Main Instance { get; private set; }
+		public SceneManager SceneManager { get; private set; }
 
 		public Main() {
 			GDManager = new GraphicsDeviceManager(this);
@@ -79,7 +77,7 @@ namespace Pacman {
 		}
 
 		protected override void Update(GameTime gameTime) {
-			CurrentScene.Update(gameTime);
+			SceneManager.CurrentScene.Update(gameTime);
 			base.Update(gameTime);
 		}
 
@@ -87,7 +85,7 @@ namespace Pacman {
 			GraphicsDevice.Clear(Color.Black);
 			Renderer.Begin();
 
-			CurrentScene.Draw(gameTime, Renderer);
+			SceneManager.CurrentScene.Draw(gameTime, Renderer);
 			base.Draw(gameTime);
 
 			Renderer.End();

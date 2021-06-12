@@ -16,7 +16,7 @@ namespace Pacman.Behaviours {
 		protected override Vector2 Scale { get; set; }
 
 		private readonly Graph pathGraph;
-		private readonly List<CreepSpawn> spawns = new List<CreepSpawn>();
+		private readonly List<CreepSpawn> spawns = new();
 
 		public Creep(Vector2 position) {
 			Setup(position, TEXTURE_ID);
@@ -36,7 +36,7 @@ namespace Pacman.Behaviours {
 			Point[] newlyOccupied = pathGraph.IterateBFS();
 
 			foreach (Point point in newlyOccupied) {
-				CreepSpawn spawn = new CreepSpawn(GameWorld.Instance.WorldCoordinates(point));
+				CreepSpawn spawn = new(GameWorld.Instance.WorldCoordinates(point));
 				spawns.Add(spawn);
 			}
 		}

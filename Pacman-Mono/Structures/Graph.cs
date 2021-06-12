@@ -21,14 +21,14 @@ namespace Pacman.Structures {
 
 		private readonly bool[,] visited;
 		private readonly bool[,] graphData;
-		private readonly Queue<Point> toGo = new Queue<Point>();
+		private readonly Queue<Point> toGo = new();
 
 		public bool FullyDiscovered { get; private set; }
 
 		public Point[] IterateBFS() {
-			List<Point> ret = new List<Point>();
+			List<Point> ret = new();
 
-			Queue<Point> toGoCopy = new Queue<Point>(toGo);
+			Queue<Point> toGoCopy = new(toGo);
 			toGo.Clear();
 
 			while (toGoCopy.Count != 0) {
@@ -46,7 +46,7 @@ namespace Pacman.Structures {
 		}
 
 		private Point[] GetEmptyNeighbors(Point p) {
-			List<Point> points = new List<Point>();
+			List<Point> points = new();
 
 			int xL = p.X - 1;
 			int xR = p.X + 1;
@@ -70,7 +70,7 @@ namespace Pacman.Structures {
 		}
 
 		public Point[] GetEmptyNeighborsIgnoreVisited(Point p) {
-			List<Point> points = new List<Point>();
+			List<Point> points = new();
 
 			int xL = p.X - 1;
 			int xR = p.X + 1;
