@@ -14,7 +14,7 @@ namespace Pacman.Behaviours.Base {
 		private string texture;
 
 
-		protected virtual void Setup(Vector2 position, string textureID) {
+		protected void Setup(Vector2 position, string textureID) {
 			Texture2D tx = Main.Sprites[textureID];
 			float scaleX = GameWorld.Instance.CellSizeX / tx.Width;
 			float scaleY = GameWorld.Instance.CellSizeY / tx.Height;

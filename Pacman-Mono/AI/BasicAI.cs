@@ -15,7 +15,7 @@ namespace Pacman.AI {
 		private Point target;
 		private Point previousTarget;
 		
-		protected float animationProgress = 0;
+		protected float animationProgress;
 		protected bool animate;
 		protected Vector2 targetPosition;
 		protected Vector2 initialPosition;

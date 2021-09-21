@@ -18,6 +18,8 @@ namespace Pacman.Behaviours {
 		private readonly Graph pathGraph;
 		private readonly List<CreepSpawn> spawns = new();
 
+		public IEnumerable<CreepSpawn> Spawns => spawns;
+
 		public Creep(Vector2 position) {
 			Setup(position, TEXTURE_ID);
 			pathGraph = WorldHelper.GenerateGraphOfOpenSpaces(GameWorld.Instance.SelectedWorld, GameWorld.Instance.GridCoordinates(position));

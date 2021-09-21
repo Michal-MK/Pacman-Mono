@@ -19,11 +19,11 @@ namespace Pacman.World {
 		public const int BONUS_DISTANCE_THRESHOLD_SQUARED = 1024 + 512;
 		public const int GHOST_DISTANCE_THRESHOLD_SQUARED = 1024 + 512;
 
-		private readonly List<Wall> walls = new List<Wall>();
-		private readonly List<Food> food = new List<Food>();
-		private readonly List<Ghost> ghosts = new List<Ghost>();
-		private readonly List<Energizer> energizers = new List<Energizer>();
-		private readonly List<Point> openSpaces = new List<Point>();
+		private readonly List<Wall> walls = new();
+		private readonly List<Food> food = new();
+		private readonly List<Ghost> ghosts = new();
+		private readonly List<Energizer> energizers = new();
+		private readonly List<Point> openSpaces = new();
 
 		private BonusSpawner bonusSpawner;
 
@@ -87,7 +87,6 @@ namespace Pacman.World {
 					}
 				}
 			}
-
 		}
 
 		public void Restart() {
@@ -120,12 +119,13 @@ namespace Pacman.World {
 			return true;
 		}
 
-		public bool IsOverFood(Vector2 position, out Food found) => IsOverBehaviour(position, food, FOOD_DISTANCE_THRESHOLD_SQUARED, out found);
-		public bool IsOverEnergizer(Vector2 position, out Energizer found) => IsOverBehaviour(position, energizers, ENERGIZER_DISTANCE_THRESHOLD_SQUARED, out found);
+		public bool IsOverFood(Vector2 position, out Food found) => IsOverAnyBehaviour(position, food, FOOD_DISTANCE_THRESHOLD_SQUARED, out found);
+		public bool IsOverEnergizer(Vector2 position, out Energizer found) => IsOverAnyBehaviour(position, energizers, ENERGIZER_DISTANCE_THRESHOLD_SQUARED, out found);
 		public bool IsOverBonus(Vector2 position, out Bonus found) => IsOverBehaviour(position, Bonus, BONUS_DISTANCE_THRESHOLD_SQUARED, out found);
-		public bool IsOverGhost(Vector2 position, out Ghost found) => IsOverBehaviour(position, ghosts, GHOST_DISTANCE_THRESHOLD_SQUARED, out found);
+		public bool IsOverGhost(Vector2 position, out Ghost found) => IsOverAnyBehaviour(position, ghosts, GHOST_DISTANCE_THRESHOLD_SQUARED, out found);
+		public bool IsOverCreep(Vector2 position, out CreepSpawn creep) => IsOverAnyBehaviour(position, Creep.Spawns, GHOST_DISTANCE_THRESHOLD_SQUARED, out creep);
 
-		private static bool IsOverBehaviour<T>(Vector2 position, IEnumerable<T> behaviours, int threshold, out T found) where T : Behaviour {
+		private static bool IsOverAnyBehaviour<T>(Vector2 position, IEnumerable<T> behaviours, int threshold, out T found) where T : Behaviour {
 			foreach (T behaviour in behaviours) {
 				if (Vector2.DistanceSquared(behaviour.Position, position) < threshold) {
 					found = behaviour;
@@ -145,7 +145,9 @@ namespace Pacman.World {
 		}
 
 		public void RemoveFood(Food cherry) => food.Remove(cherry);
+
 		public void RemoveEnergizer(Energizer energizer) => energizers.Remove(energizer);
+
 		public void RemoveBonus(Bonus bonus) { bonus.Collect(); Bonus = null; }
 
 		#endregion
@@ -161,12 +163,11 @@ namespace Pacman.World {
 
 		#endregion
 
-		public Vector2 WorldCoordinates(Point point) => new Vector2(point.X * CellSizeX, point.Y * CellSizeY);
+		public Vector2 WorldCoordinates(Point point) => new(point.X * CellSizeX, point.Y * CellSizeY);
 
-		public Point GridCoordinates(Vector2 worldCoordinates) => new Point((int)(worldCoordinates.X / CellSizeX), (int)(worldCoordinates.Y / CellSizeY));
+		public Point GridCoordinates(Vector2 worldCoordinates) => new((int)(worldCoordinates.X / CellSizeX), (int)(worldCoordinates.Y / CellSizeY));
 
 		public Point GetRandomOpenSpot() => openSpaces[Main.Random.Next(0, openSpaces.Count)];
-
 
 		public Bonus SpawnBonus(Vector2 position) {
 			return Bonus = new Bonus(position);
