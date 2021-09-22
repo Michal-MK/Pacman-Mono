@@ -7,8 +7,8 @@ using Pacman.UI.Enums;
 namespace Pacman.UI.Controls.Base {
 	public class UIElement {
 
-		protected Point Position { get; }
-		protected Vector2 PositionV2 => Position.ToVector2();
+		internal Point Position { get; set; }
+		internal Vector2 PositionV2 => Position.ToVector2();
 
 		protected Texture2D MainTexture { get; }
 		protected bool IsMouseOver { get; private set; }

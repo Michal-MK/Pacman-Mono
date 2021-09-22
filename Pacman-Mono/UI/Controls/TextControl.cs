@@ -7,13 +7,16 @@ using Pacman.UI.Controls.Base;
 using Pacman.UI.Enums;
 
 namespace Pacman.UI.Controls {
-	public class TextControl : UIElement {
+	public class TextControl : SizedElement {
 
 		private float rotation;
 		private float angle;
 		private readonly BitmapFont renderFont;
 
 		public string Text { get; set; }
+
+		public override int SizeX => (int)renderFont.MeasureString(Text).Width;
+		public override int SizeY => (int)renderFont.MeasureString(Text).Height;
 
 		public TextControl(string text, BitmapFont font, Point origin, string textureID, OriginMode mode) : base(origin, textureID, mode) {
 			Text = text;

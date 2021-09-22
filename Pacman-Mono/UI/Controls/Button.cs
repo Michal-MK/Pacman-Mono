@@ -6,11 +6,14 @@ using Pacman.UI.Controls.Base;
 using Pacman.UI.Enums;
 
 namespace Pacman.UI.Controls {
-	public class Button : UIElement {
+	public class Button : SizedElement {
 
 		public const string TEXTURE_ID = "button";
 
 		public event EventHandler OnClick;
+
+		public override int SizeY => MainTexture.Bounds.Height;
+		public override int SizeX => MainTexture.Bounds.Width;
 
 		private string buttonText;
 		public string ButtonText { get => buttonText; set { buttonText = value; textHalfSize = Main.Font.MeasureString(value) * 0.5f; } }
